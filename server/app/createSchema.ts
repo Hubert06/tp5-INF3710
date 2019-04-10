@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Examen (
     heure VARCHAR(5),
     description VARCHAR(30),
     PRIMARY KEY (numExam),
-    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp),
+    FOREIGN KEY (numEmp) REFERENCES bdschema.Veterinaire(numEmp),
     FOREIGN KEY (numAni) REFERENCES bdschema.Animal(numAni)
 );
 
