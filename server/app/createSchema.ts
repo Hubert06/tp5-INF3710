@@ -1,48 +1,93 @@
 export const schema: string = `
-SET search_path = hotelDB;
+SET search_path = TP5;
+DROP SCHEMA IF EXISTS bdschema CASCADE;
+CREATE SCHEMA bdschema;
 
-DROP SCHEMA IF EXISTS HOTELDB CASCADE;
-CREATE SCHEMA HOTELDB;
+CREATE TABLE IF NOT EXISTS bdschema.Clinique (
+    numClinique VARCHAR(10),
+    adresse VARCHAR(30),
+    numTelephone VARCHAR(15),
+    numTelecopieur VARCHAR(15),
+    PRIMARY KEY (numClinique)
+);
 
-CREATE TABLE IF NOT EXISTS  HOTELDB.Hotel (
-		hotelNo		VARCHAR(10)		NOT NULL,
-		hotelName 	VARCHAR(20)		NOT NULL,
-		city		VARCHAR(50)		NOT NULL,
-		PRIMARY KEY (hotelNo));
+CREATE TABLE IF NOT EXISTS bdschema.Employe (
+    numEmp VARCHAR(10),
+    numClinique VARCHAR(10),
+    nom VARCHAR(30),
+    adresse VARCHAR(30),
+    numTelephone VARCHAR(15),
+    dob DATE,
+    sexe VARCHAR(1) CHECK (sexe = 'M' OR sexe = 'F'),
+    nas VARCHAR(10),
+    fonction VARCHAR(30),
+    salaire NUMERIC,
+    PRIMARY KEY (numEmp),
+    FOREIGN KEY (numClinique) REFERENCES bdschema.Clinique(numClinique)
+);
 
-CREATE TABLE IF NOT EXISTS HOTELDB.Room(
-roomNo VARCHAR(10) NOT NULL,
-hotelNo VARCHAR(10)	NOT NULL,
-typeroom VARCHAR(10)	NOT NULL,
-price NUMERIC(6,3) NOT NULL,
-PRIMARY KEY (roomNo, hotelNo),
-FOREIGN KEY(hotelNo) REFERENCES HOTELDB.Hotel(hotelNo) ON DELETE RESTRICT ON UPDATE CASCADE);
+CREATE TABLE IF NOT EXISTS bdschema.Gestionnaire (
+    numEmp VARCHAR(10),
+    PRIMARY KEY (numEmp),
+    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp)
+);
 
+CREATE TABLE IF NOT EXISTS bdschema.Veterinaire (
+    numEmp VARCHAR(10),
+    PRIMARY KEY (numEmp),
+    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp)
+);
 
-CREATE DOMAIN HOTELDB.sexType AS CHAR
-	CHECK (VALUE IN ('M', 'F'));
+CREATE TABLE IF NOT EXISTS bdschema.Proprietaire (
+    numProp VARCHAR(10),
+    numClinique VARCHAR(10),
+    nom VARCHAR(30),
+    adresse VARCHAR(30),
+    numTelephone VARCHAR(15),
+    PRIMARY KEY (numProp),
+    FOREIGN KEY (numClinique) REFERENCES bdschema.Clinique(numClinique)
+);
 
-CREATE TABLE IF NOT EXISTS HOTELDB.Guest(
-guestNo		VARCHAR(10)		NOT NULL,
-nas		VARCHAR(10)		UNIQUE NOT NULL,
-guestName 	VARCHAR(20)		NOT NULL,
-gender		sexType			DEFAULT 'M',
-guestCity	VARCHAR(50)		NOT NULL,
-PRIMARY KEY (guestNo));
+CREATE TABLE IF NOT EXISTS bdschema.Animal (
+    numAni VARCHAR(10),
+    numProp VARCHAR(10),
+    nom VARCHAR(30),
+    type VARCHAR(30),
+    description VARCHAR(30),
+    dob DATE,
+    dateInsc DATE,
+    etat VARCHAR(30),
+    PRIMARY KEY (numAni),
+    FOREIGN KEY (numProp) REFERENCES bdschema.Proprietaire(numProp) ON DELETE CASCADE
+);
 
-CREATE TABLE IF NOT EXISTS HOTELDB.Booking(
-		hotelNo		VARCHAR(10)		NOT NULL,
-		guestNo	  	VARCHAR(10)		NOT NULL,
-		dateFrom 	DATE			NOT NULL,
-		dateTo		DATE			NULL,
-		roomNo		VARCHAR(10)		NOT NULL,
-		PRIMARY KEY (hotelNo, guestNo, roomNO, dateFrom),
-		FOREIGN KEY (guestNo) REFERENCES HOTELDB.Guest(guestNo)
-		ON DELETE SET NULL ON UPDATE CASCADE,
-		FOREIGN KEY (hotelNo, roomNo) REFERENCES HOTELDB.Room (hotelNo, roomNo)
-		ON DELETE NO ACTION ON UPDATE CASCADE,
-		CONSTRAINT date CHECK (dateTo >= dateFrom),
-		CONSTRAINT dateFrom CHECK (dateFrom >= current_date));
+CREATE TABLE IF NOT EXISTS bdschema.Examen (
+    numExam VARCHAR(10),
+    numEmp VARCHAR(10),
+    numAni VARCHAR(10),
+    date DATE,
+    heure VARCHAR(5),
+    description VARCHAR(30),
+    PRIMARY KEY (numExam),
+    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp),
+    FOREIGN KEY (numAni) REFERENCES bdschema.Animal(numAni)
+);
 
-ALTER TABLE HOTELDB.Guest ALTER gender DROP DEFAULT;
+CREATE TABLE IF NOT EXISTS bdschema.Traitement (
+    numTrait VARCHAR(10),
+    description VARCHAR(30),
+    cout NUMERIC,
+    PRIMARY KEY (numTrait)
+);
+
+CREATE TABLE IF NOT EXISTS bdschema.Prescription (
+    numTrait VARCHAR(10),
+    numExam VARCHAR(10),
+    qte NUMERIC,
+    dateDebut DATE,
+    dateFin DATE,
+    PRIMARY KEY (numTrait, numExam),
+    FOREIGN KEY (numTrait) REFERENCES bdschema.Traitement(numTrait),
+    FOREIGN KEY (numExam) REFERENCES bdschema.Examen(numExam)
+);
 `;

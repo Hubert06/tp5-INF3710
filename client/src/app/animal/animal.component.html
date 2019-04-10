@@ -13,7 +13,10 @@
       Date of birth : <li><input  class="form-control col-md-4" #animalDob></li>
       Date of inscription : <li><input  class="form-control col-md-4" #animalDoi></li>
       State : <li><input  class="form-control col-md-4" #animalState></li>
-      Mettre une liste deroulante ici pour les numéros de propriétaires !!!
+      Owner number :
+      <select>
+          <option *ngFor="let ownerNumber of ownerNumbers" value={{ownerNumber}}>{{ownerNumber}}</option>
+      </select>
     <li><button type="button" class="btn btn-primary" (click)="insertHotel(hotelNo.value,hotelName.value, hotelCity.value)"> Add Hotel</button></li>
     </ul>
   </div> 
@@ -22,12 +25,12 @@
       <div>
         <h2> Find an animal treatments history :</h2>
         numAnimal : <li><input class="form-control col-md-4" #numAnimalTreatment></li>
-        <li><button type="button" class="btn btn-primary" (click)="findAnimal(numAnimalTreatment.value)"> Find </button></li>
+        <li><button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find </button></li>
       </div>
       <div>
         <h2> Find information on an animal :</h2>
         Name of the animal : <li><input class="form-control col-md-4" #animalNameInfos></li>
-        <li><button type="button" class="btn btn-primary" (click)="findAnimal(animalNameInfos.value)"> Find </button></li>
+        <li><button type="button" class="btn btn-primary" (click)="findAnimalInfos(animalNameInfos.value)"> Find </button></li>
       </div>
     </ul>
   </div>

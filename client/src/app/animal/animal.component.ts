@@ -11,7 +11,7 @@ export class AnimalComponent {
 
   public constructor(private communicationService: CommunicationService) { }
 
-
+  public ownerNumbers: number[] = [0, 1, 2, 3];
   public duplicateError: boolean = false;
 
   public insertAnimal(animalNo: string, animalName: string, animalCity: string): void {

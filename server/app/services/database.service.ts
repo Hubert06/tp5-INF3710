@@ -11,7 +11,7 @@ export class DatabaseService {
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
         user: "tp5_user",
-        database: "Hotel",
+        database: "TP5",
         password: "banane123",
         port: 5432,
         host: "127.0.0.1",
@@ -21,7 +21,6 @@ export class DatabaseService {
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
     /*
-
         METHODES DE DEBUG
     */
     public createSchema(): Promise<pg.QueryResult> {
