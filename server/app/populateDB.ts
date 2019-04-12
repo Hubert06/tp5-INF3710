@@ -36,7 +36,7 @@ INSERT INTO bdschema.Examen VALUES ('EX202', 'E203', 'A202', '2019-06-06', '20:0
 INSERT INTO bdschema.Traitement VALUES ('T101', 'Application du platre', 500);
 INSERT INTO bdschema.Traitement VALUES ('T102', 'Don du medicament', 300);
 INSERT INTO bdschema.Traitement VALUES ('T201', 'App des points de suture', 400);
-INSERT INTO bdschema.Traitement VALUES ('T202', 'Injection du vaccin', 200);
+INSERT INTO bdschema.Traitement VALUES ('T202', 'Vaccination contre la grippe', 200);
 
 INSERT INTO bdschema.Prescription VALUES ('T101', 'EX101', 1, '2019-03-03', '2019-03-04');
 INSERT INTO bdschema.Prescription VALUES ('T102', 'EX102', 3, '2019-04-04', '2019-04-08');
