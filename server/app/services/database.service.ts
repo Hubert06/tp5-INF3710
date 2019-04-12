@@ -48,6 +48,12 @@ export class DatabaseService {
         return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
     }
 
+    public getOwnerNumbers(): Promise<pg.QueryResult> {
+        this.pool.connect();
+
+        return this.pool.query('');
+    }
+
     // HOTEL
     public getAnimals(): Promise<pg.QueryResult> {
         this.pool.connect();

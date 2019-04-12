@@ -13,13 +13,14 @@ export class AnimalComponent {
 
   public constructor(private communicationService: CommunicationService) { }
 
-  public ownerNumbers: number[] = [0, 1, 2, 3];
+  public ownerNumbers: number[] = [];
   public duplicateError: boolean = false;
   public animals: Animal[] = [];
   public treatmentsHistory: Treatment[] = [];
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.getAnimals();
+    this.getOwnerNumbers();
   }
 
   public insertAnimal(animalNo: string, animalName: string, animalCity: string): void {
@@ -35,6 +36,7 @@ export class AnimalComponent {
         this.duplicateError = (res === -1);
     });
   }
+
   public findAnimalTreatments(input: string): void {
     console.log(input);
     this.communicationService.getTreatmentsHistory().subscribe((treatmentsHistory: Treatment[]) => {
@@ -44,17 +46,21 @@ export class AnimalComponent {
 
   public getAnimals(): void {
     this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
-        // this.cutDatesAnimals(animals);
+        this.cutDatesAnimals(animals);
         this.animals = animals;
     });
   }
 
-  // private cutDatesAnimals(animals: Animal[]): void {
-  //   for (const ani of animals) {
-  //     const dob: Date = new Date(ani.dob);
-  //     const doi: Date = new Date(ani.doi);
-  //     ani.dob = dob.toDateString();
-  //     ani.doi = doi.toDateString();
-  //   }
-  // }
+  public getOwnerNumbers(): void {
+    this.communicationService.getOwnerNumbers().subscribe((ownerNumbers: number[]) => {
+      this.ownerNumbers = ownerNumbers;
+  });
+  }
+
+  private cutDatesAnimals(animals: Animal[]): void {
+    for (const ani of animals) {
+      ani.dob = (ani.dob as string).substring(0,10);
+      ani.doi = (ani.doi as string).substring(0,10);
+    }
+  }
 }
