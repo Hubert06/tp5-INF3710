@@ -49,10 +49,10 @@ export class DatabaseService {
     }
 
     // HOTEL
-    public getHotels(): Promise<pg.QueryResult> {
+    public getAnimals(): Promise<pg.QueryResult> {
         this.pool.connect();
 
-        return this.pool.query('SELECT * FROM HOTELDB.Hotel;');
+        return this.pool.query('SELECT * FROM bdschema.animal;');
     }
 
     public getHotelNo(): Promise<pg.QueryResult> {
