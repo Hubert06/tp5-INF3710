@@ -2,8 +2,8 @@ import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
 import { Room } from "../../../common/tables/Room";
-import {schema} from "../createSchema";
-import {data} from "../populateDB";
+import { schema } from "../createSchema";
+import { data } from "../populateDB";
 
 @injectable()
 export class DatabaseService {

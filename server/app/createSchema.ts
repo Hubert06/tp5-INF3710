@@ -29,13 +29,13 @@ CREATE TABLE IF NOT EXISTS bdschema.Employe (
 CREATE TABLE IF NOT EXISTS bdschema.Gestionnaire (
     numEmp VARCHAR(10),
     PRIMARY KEY (numEmp),
-    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp)
+    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Veterinaire (
     numEmp VARCHAR(10),
     PRIMARY KEY (numEmp),
-    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp)
+    FOREIGN KEY (numEmp) REFERENCES bdschema.Employe(numEmp) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Proprietaire (
@@ -56,20 +56,20 @@ CREATE TABLE IF NOT EXISTS bdschema.Animal (
     description VARCHAR(30),
     dob DATE,
     dateInsc DATE,
-    etat VARCHAR(30),
+    etat VARCHAR(30) CHECK (etat = 'vivant' OR etat = 'decede'),
     PRIMARY KEY (numAni),
     FOREIGN KEY (numProp) REFERENCES bdschema.Proprietaire(numProp) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Examen (
     numExam VARCHAR(10),
-    numEmp VARCHAR(10),
+    numVeterinaire VARCHAR(10),
     numAni VARCHAR(10),
     date DATE,
     heure VARCHAR(5),
     description VARCHAR(30),
     PRIMARY KEY (numExam),
-    FOREIGN KEY (numEmp) REFERENCES bdschema.Veterinaire(numEmp),
+    FOREIGN KEY (numVeterinaire) REFERENCES bdschema.Veterinaire(numEmp) ON DELETE CASCADE,
     FOREIGN KEY (numAni) REFERENCES bdschema.Animal(numAni)
 );
 
@@ -88,6 +88,6 @@ CREATE TABLE IF NOT EXISTS bdschema.Prescription (
     dateFin DATE,
     PRIMARY KEY (numTrait, numExam),
     FOREIGN KEY (numTrait) REFERENCES bdschema.Traitement(numTrait),
-    FOREIGN KEY (numExam) REFERENCES bdschema.Examen(numExam)
+    FOREIGN KEY (numExam) REFERENCES bdschema.Examen(numExam) ON DELETE CASCADE
 );
 `;
