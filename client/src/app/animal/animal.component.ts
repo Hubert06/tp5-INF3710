@@ -39,7 +39,6 @@ export class AnimalComponent {
   }
 
   public findAnimalTreatments(numAni: string): void {
-    console.log(numAni);
     this.communicationService.getTreatmentsHistory(numAni).subscribe((treatmentsHistory: Treatment[]) => {
       this.treatmentsHistory = treatmentsHistory;
       console.log(this.treatmentsHistory);
