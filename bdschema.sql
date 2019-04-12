@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Animal (
     description VARCHAR(30),
     dob DATE,
     dateInsc DATE,
-    etat VARCHAR(30),
+    etat VARCHAR(30) CHECK (etat = 'vivant' OR etat = 'decede'),
     PRIMARY KEY (numAni),
     FOREIGN KEY (numProp) REFERENCES bdschema.Proprietaire(numProp) ON DELETE CASCADE
 );

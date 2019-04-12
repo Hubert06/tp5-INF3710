@@ -23,18 +23,18 @@ INSERT INTO bdschema.Proprietaire VALUES ('P301', 'C002', 'Bob Tremblay', '234 r
 
 INSERT INTO bdschema.Animal VALUES ('A101', 'P101', 'Pedro', 'chat', 'Gros et feroce', '2001-01-01', '2019-01-01', 'Patte cassee');
 INSERT INTO bdschema.Animal VALUES ('A102', 'P101', 'Juan', 'Labrador', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'Malade');
-INSERT INTO bdschema.Animal VALUES ('A201', 'P201', 'Carlos', 'chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'Oreille cassee');
-INSERT INTO bdschema.Animal VALUES ('A202', 'P201', 'Emilio', 'chien', 'Petit et feroce', '2002-02-02', '2019-04-04', 'Grippe');
+INSERT INTO bdschema.Animal VALUES ('A201', 'P201', 'Carlos', 'Chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'Oreille cassee');
+INSERT INTO bdschema.Animal VALUES ('A202', 'P201', 'Emilio', 'Tortue', 'Petit et feroce', '2002-02-02', '2019-04-04', 'Grippe');
 
-INSERT INTO bdschema.Examen VALUES ('EX101', 'E103', 'A101', '2019-03-03', '12:00', 'Examen général');
-INSERT INTO bdschema.Examen VALUES ('EX102', 'E103', 'A102', '2019-04-04', '18:00', 'Examen général');
-INSERT INTO bdschema.Examen VALUES ('EX201', 'E203', 'A201', '2019-05-05', '14:00', 'Examen général');
-INSERT INTO bdschema.Examen VALUES ('EX202', 'E203', 'A202', '2019-06-06', '20:00', 'Examen général');
+INSERT INTO bdschema.Examen VALUES ('EX101', 'E103', 'A101', '2019-03-03', '12:00', 'vivant');
+INSERT INTO bdschema.Examen VALUES ('EX102', 'E103', 'A102', '2019-04-04', '18:00', 'decede');
+INSERT INTO bdschema.Examen VALUES ('EX201', 'E203', 'A201', '2019-05-05', '14:00', 'vivant');
+INSERT INTO bdschema.Examen VALUES ('EX202', 'E203', 'A202', '2019-06-06', '20:00', 'decede');
 
-INSERT INTO bdschema.Traitement VALUES ('T101', 'Application pour patte', 500);
-INSERT INTO bdschema.Traitement VALUES ('T102', 'Prescription  maladie', 300);
-INSERT INTO bdschema.Traitement VALUES ('T201', 'Points de suture', 400);
-INSERT INTO bdschema.Traitement VALUES ('T202', 'Vaccination contre la grippe', 200);
+INSERT INTO bdschema.Traitement VALUES ('T101', 'Application du platre', 500);
+INSERT INTO bdschema.Traitement VALUES ('T102', 'Don du medicament', 300);
+INSERT INTO bdschema.Traitement VALUES ('T201', 'App des points de suture', 400);
+INSERT INTO bdschema.Traitement VALUES ('T202', 'Injection du vaccin', 200);
 
 INSERT INTO bdschema.Prescription VALUES ('T101', 'EX101', 1, '2019-03-03', '2019-03-04');
 INSERT INTO bdschema.Prescription VALUES ('T102', 'EX102', 3, '2019-04-04', '2019-04-08');
