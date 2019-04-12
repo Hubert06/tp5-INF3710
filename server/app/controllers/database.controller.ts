@@ -45,17 +45,22 @@ export class DatabaseController {
                 });
             });
 
-        router.get("/hotel",
+        router.get("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
-                    this.databaseService.getHotels().then((result: pg.QueryResult) => {
-                    const animals: Animal[] = [];
-                    // result.rows.map((hot: any) => (
-                    //     {
-                    //     hotelno: hot.hotelno,
-                    //     hotelname: hot.hotelname,
-                    //     city: hot.city
-                    // }));
+                    this.databaseService.getAnimals().then((result: pg.QueryResult) => {
+                    const animals: Animal[] =
+                    result.rows.map((ani: any) => (
+                        {
+                        num : ani.numani,
+                        name : ani.nom,
+                        type : ani.type,
+                        desc : ani.description,
+                        dob : ani.dob,
+                        doi : ani.dateinsc,
+                        state : ani.etat,
+                        ownerNum : ani.numprop,
+                    }));
                     res.json(animals);
                 }).catch((e: Error) => {
                     console.error(e.stack);

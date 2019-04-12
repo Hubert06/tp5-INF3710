@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Animal } from "../../../../common/tables/Animal";
 import { CommunicationService } from "../communication.service";
 
 @Component({
@@ -13,6 +14,11 @@ export class AnimalComponent {
 
   public ownerNumbers: number[] = [0, 1, 2, 3];
   public duplicateError: boolean = false;
+  public animals: Animal[] = [];
+
+  public ngOnInit() { 
+    this.getAnimals();
+  }
 
   public insertAnimal(animalNo: string, animalName: string, animalCity: string): void {
     const animal: any = {
@@ -33,4 +39,20 @@ export class AnimalComponent {
       console.log(res);
   });
   }
+
+  public getAnimals(): void {
+    this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
+        // this.cutDatesAnimals(animals);
+        this.animals = animals;
+    });
+  }
+
+  // private cutDatesAnimals(animals: Animal[]): void {
+  //   for (const ani of animals) {
+  //     const dob: Date = new Date(ani.dob);
+  //     const doi: Date = new Date(ani.doi);
+  //     ani.dob = dob.toDateString();
+  //     ani.doi = doi.toDateString();
+  //   }
+  // }
 }
