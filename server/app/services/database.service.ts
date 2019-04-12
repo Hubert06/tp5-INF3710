@@ -24,13 +24,13 @@ export class DatabaseService {
     /*
         METHODES DE DEBUG
     */
-    public async createSchema(): Promise<pg.QueryResult> {
-        this.pool.connect(); 
+    public createSchema(): Promise<pg.QueryResult> {
+        this.pool.connect();
 
         return this.pool.query(schema);
     }
 
-    public async populateDb(): Promise<pg.QueryResult> {
+    public populateDb(): Promise<pg.QueryResult> {
         this.pool.connect();
 
         return this.pool.query(data);
@@ -49,10 +49,10 @@ export class DatabaseService {
     }
 
     // HOTEL
-    public getAnimals(): Promise<pg.QueryResult> {
+    public getHotels(): Promise<pg.QueryResult> {
         this.pool.connect();
 
-        return this.pool.query('SELECT * FROM bdschema.animal;');
+        return this.pool.query('SELECT * FROM HOTELDB.Hotel;');
     }
 
     public getHotelNo(): Promise<pg.QueryResult> {
