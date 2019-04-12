@@ -36,13 +36,13 @@ export class DatabaseController {
                     });
         });
 
-        router.post("/treatmentsHistory",
-                    (req: Request, res: Response, next: NextFunction) => {
+        router.get("/treatmentsHistory",
+                   (req: Request, res: Response, next: NextFunction) => {
                     this.databaseService.getTreatmentsHistory().then((result: pg.QueryResult) => {
                     const treatmentsHistory: Treatment[] =
                     result.rows.map((treatment: any) => (
                         {
-                        numTraitement : treatment.numtraitement,
+                        numtrait : treatment.numtrait,
                         description : treatment.description,
                         cout : treatment.cout,
                     }));
