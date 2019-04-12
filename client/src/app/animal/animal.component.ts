@@ -42,17 +42,15 @@ export class AnimalComponent {
 
   public getAnimals(): void {
     this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
-        // this.cutDatesAnimals(animals);
+        this.cutDatesAnimals(animals);
         this.animals = animals;
     });
   }
 
-  // private cutDatesAnimals(animals: Animal[]): void {
-  //   for (const ani of animals) {
-  //     const dob: Date = new Date(ani.dob);
-  //     const doi: Date = new Date(ani.doi);
-  //     ani.dob = dob.toDateString();
-  //     ani.doi = doi.toDateString();
-  //   }
-  // }
+  private cutDatesAnimals(animals: Animal[]): void {
+    for (const ani of animals) {
+      ani.dob = (ani.dob as string).substring(0,10);
+      ani.doi = (ani.doi as string).substring(0,10);
+    }
+  }
 }
