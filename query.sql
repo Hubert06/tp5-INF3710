@@ -6,7 +6,7 @@ INNER JOIN Employe ON fonction = 'Gestionnaire' WHERE Clinique.numClinique = Emp
 ORDER BY Clinique.numClinique;
 
 -- 2) Lister les noms des animaux sans doublons dans toutes les cliniques
-SELECT DISTINCT nom FROM animal; --CTu juste ca!?!? I mean si ca marche c'est chill
+SELECT DISTINCT nom FROM animal;
 
 -- 3) Lister les numéros et noms des propriétaires d’animaux ainsi que les détails de leurs
 -- animaux dans une clinique donnée (à vous de la choisir)
@@ -66,35 +66,19 @@ SELECT * FROM proprietaire WHERE numProp IN
     (
         SELECT numProp FROM animal WHERE type = 'chat'
         EXCEPT
-        SELECT numProp FROM animal WHERE 
-            type = 'chien' 
-            AND 
-            numAni IN 
-                (
-                    SELECT numAni FROM examen WHERE 
-                    numExam = 
-                        (
-                            SELECT numExam FROM prescription WHERE 
-                                numTrait = 
-                                    (
-                                        SELECT numTrait FROM traitement WHERE
-                                            (
-                                                description = 'Vaccination contre la grippe'
-                                            )
-                                    )
-                        )
-                )
+        SELECT numProp FROM animal 
+        LEFT JOIN Examen ON Animal.numAni = Examen.numAni
+        LEFT JOIN Prescription ON Prescription.numExam = Examen.numExam
+        LEFT JOIN Traitement  ON Traitement.numTrait = Prescription.numTrait
+        WHERE traitement.description = 'Vaccination contre la grippe'
     );
 
 -- 15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le
 -- cas contraire, affichez null.
 SELECT Animal.numAni, Animal.numProp, Animal.nom, Animal.type, Animal.description, Animal.dob,
 Animal.dateInsc, Animal.etat, Traitement.numTrait, Traitement.description, Traitement.cout FROM Traitement
-LEFT JOIN Prescription
-LEFT JOIN EXAMEN
-LEFT JOIN Animal
+LEFT JOIN Prescription ON Traitement.numTrait = Prescription.numTrait
+LEFT JOIN EXAMEN ON Prescription.numExam = Examen.numExam
+LEFT JOIN Animal ON Examen.numAni = Animal.numAni
 LEFT JOIN Proprietaire ON Animal.numProp = Proprietaire.numProp
-ON Examen.numAni = Animal.numAni
-ON Prescription.numExam = Examen.numExam
-ON Traitement.numTrait = Prescription.numTrait
 WHERE numClinique = 'C001';

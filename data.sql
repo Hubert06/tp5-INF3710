@@ -18,8 +18,10 @@ INSERT INTO bdschema.Veterinaire VALUES ('E203');
 
 INSERT INTO bdschema.Proprietaire VALUES ('P101', 'C001', 'Gino Tremblay', '123 rue des Tremblay', '450-123-4567');
 INSERT INTO bdschema.Proprietaire VALUES ('P201', 'C002', 'Camille Tremblay', '234 rue des Tremblay', '450-234-5678');
+INSERT INTO bdschema.Proprietaire VALUES ('P301', 'C002', 'Bob Tremblay', '234 rue des Tremblay', '450-234-5678');
 
-INSERT INTO bdschema.Animal VALUES ('A101', 'P101', 'Pedro', 'Berger allemand', 'Gros et feroce', '2001-01-01', '2019-01-01', 'Patte cassee');
+
+INSERT INTO bdschema.Animal VALUES ('A101', 'P101', 'Pedro', 'chat', 'Gros et feroce', '2001-01-01', '2019-01-01', 'Patte cassee');
 INSERT INTO bdschema.Animal VALUES ('A102', 'P101', 'Juan', 'Labrador', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'Malade');
 INSERT INTO bdschema.Animal VALUES ('A201', 'P201', 'Carlos', 'chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'Oreille cassee');
 INSERT INTO bdschema.Animal VALUES ('A202', 'P201', 'Emilio', 'chien', 'Petit et feroce', '2002-02-02', '2019-04-04', 'Grippe');
