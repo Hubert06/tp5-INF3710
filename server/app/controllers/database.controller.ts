@@ -35,6 +35,16 @@ export class DatabaseController {
                     });
         });
 
+        router.post("/treatmentsHistory",
+                    (req: Request, res: Response, next: NextFunction) => {
+                    this.databaseService.getTreatmentsHistory().then((result: pg.QueryResult) => {
+                    res.json(result);
+                    console.log(result);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
         router.get("/hotel",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
@@ -115,7 +125,7 @@ export class DatabaseController {
 
         router.get("/tables/:tableName",
                    (req: Request, res: Response, next: NextFunction) => {
-                this.databaseService.getAllFromTable(req.params.tableName)
+                    this.databaseService.getAllFromTable(req.params.tableName)
                     .then((result: pg.QueryResult) => {
                         res.json(result.rows);
                     }).catch((e: Error) => {

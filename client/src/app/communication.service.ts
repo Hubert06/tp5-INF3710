@@ -53,6 +53,11 @@ export class CommunicationService {
                       this.http.post<any>(this.BASE_URL + "/populateDb", []));
     }
 
+    public getTreatmentsHistory(): Observable<any[]> {
+
+        return this.http.post<any>(this.BASE_URL + "/treatmentsHistory", []);
+    }
+
     private handleError<T>(request: string, result?: T): (error: Error) => Observable<T> {
 
         return (error: Error): Observable<T> => {

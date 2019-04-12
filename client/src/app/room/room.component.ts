@@ -23,7 +23,7 @@ export class RoomComponent implements OnInit {
 
   public validateHotelNo(hotelNo: string): void {
     this.invalidHotelPK = this.hotelPKs.indexOf(hotelNo) === -1;
-    console.log("===" + hotelNo + this.invalidHotelPK)
+    console.log("===" + hotelNo + this.invalidHotelPK);
   }
 
   public insertRoom( roomNo: string, hotelNo: string, typeRoom: string, price: number): void {
@@ -36,5 +36,5 @@ export class RoomComponent implements OnInit {
     this.communicationService.insertRoom(room).subscribe((res: number) => {
         console.log(res);
     });
-}
+  }
 }

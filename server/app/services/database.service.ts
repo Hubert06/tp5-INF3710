@@ -4,6 +4,7 @@ import "reflect-metadata";
 import { Room } from "../../../common/tables/Room";
 import { schema } from "../createSchema";
 import { data } from "../populateDB";
+import { treatmentsHistory } from "../treatmentsHistory";
 
 @injectable()
 export class DatabaseService {
@@ -33,6 +34,12 @@ export class DatabaseService {
         this.pool.connect();
 
         return this.pool.query(data);
+    }
+
+    public getTreatmentsHistory(): Promise<pg.QueryResult> {
+        this.pool.connect();
+
+        return this.pool.query(treatmentsHistory);
     }
 
     public getAllFromTable(tableName: string): Promise<pg.QueryResult> {

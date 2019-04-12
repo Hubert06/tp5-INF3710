@@ -27,4 +27,10 @@ export class AnimalComponent {
         this.duplicateError = (res === -1);
     });
   }
+  public findAnimalTreatments(input: string): void {
+    console.log(input);
+    this.communicationService.getTreatmentsHistory().subscribe((res: any) => {
+      console.log(res);
+  });
+  }
 }
