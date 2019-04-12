@@ -5,34 +5,32 @@
     <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
       Insertion sur une cle primaire qui existe deja
     </div>
-    <ul style="list-style: none;">
-      Number : <li><input class="form-control col-md-4" #numAnimal></li>
-      Name : <li><input class="form-control col-md-4" #animalName></li>
-      Type : <li><input  class="form-control col-md-4" #animalType></li>
-      Description : <li><input  class="form-control col-md-4" #animalDesc></li>
-      Date of birth : <li><input  class="form-control col-md-4" #animalDob></li>
-      Date of inscription : <li><input  class="form-control col-md-4" #animalDoi></li>
-      State : <li><input  class="form-control col-md-4" #animalState></li>
+      Number : <input class="form-control col-md-4" #numAnimal>
+      Name : <input class="form-control col-md-4" #animalName>
+      Type : <input  class="form-control col-md-4" #animalType>
+      Description : <input  class="form-control col-md-4" #animalDesc>
+      Date of birth : <input  class="form-control col-md-4" #animalDob>
+      Date of inscription : <input  class="form-control col-md-4" #animalDoi>
+      State : <input  class="form-control col-md-4" #animalState>
+      <p></p>
       Owner number :
       <select>
           <option *ngFor="let ownerNumber of ownerNumbers" value={{ownerNumber}}>{{ownerNumber}}</option>
       </select>
-    <li><button type="button" class="btn btn-primary" (click)="insertHotel(hotelNo.value,hotelName.value, hotelCity.value)"> Add Hotel</button></li>
-    </ul>
+      <p></p>
+    <button type="button" class="btn btn-primary" (click)="insertHotel(hotelNo.value,hotelName.value, hotelCity.value)"> Add Hotel</button>
   </div> 
   <div>
-    <ul style="list-style: none;">
       <div>
         <h2> Find an animal treatments history :</h2>
-        numAnimal : <li><input class="form-control col-md-4" #numAnimalTreatment></li>
-        <li><button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find </button></li>
+        numAnimal : <input class="form-control col-md-4" #numAnimalTreatment>
+        <button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find </button>
       </div>
       <div>
         <h2> Find information on an animal :</h2>
-        Name of the animal : <li><input class="form-control col-md-4" #animalNameInfos></li>
-        <li><button type="button" class="btn btn-primary" (click)="findAnimalInfos(animalNameInfos.value)"> Find </button></li>
+        Name of the animal : <input class="form-control col-md-4" #animalNameInfos>
+        <button type="button" class="btn btn-primary" (click)="findAnimalInfos(animalNameInfos.value)"> Find </button>
       </div>
-    </ul>
   </div>
 </div>
 

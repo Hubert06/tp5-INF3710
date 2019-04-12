@@ -3,11 +3,11 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { AnimalComponent } from "./animal/animal.component";
 import { AppComponent } from "./app.component";
-import { RoomComponent } from "./room/room.component";
+import { TreatmentComponent } from "./treatment/treatment.component";
 
 const routes: Routes = [
   { path: "app", component: AppComponent },
-  { path: "room", component: RoomComponent },
+  { path: "treatment", component: TreatmentComponent },
   { path: "animal", component: AnimalComponent }
 ];
 
