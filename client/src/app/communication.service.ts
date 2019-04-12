@@ -68,10 +68,10 @@ export class CommunicationService {
         );
     }
 
-    public getAnimalInformation(nomAni: string): Observable<Treatment[]> {
+    public getAnimalInformation(nomAni: string): Observable<Animal[]> {
 
-        return this.http.get<Treatment[]>(this.BASE_URL + "/animalInformation/" + nomAni).pipe(
-            catchError(this.handleError<Treatment[]>("findAnimalInformation")),
+        return this.http.get<Animal[]>(this.BASE_URL + "/animalInformation/" + nomAni).pipe(
+            catchError(this.handleError<Animal[]>("findAnimalInformation")),
         );
     }
 
