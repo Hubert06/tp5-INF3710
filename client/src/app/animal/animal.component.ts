@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Animal } from "../../../../common/tables/Animal";
+import { Treatment } from "../../../../common/tables/Treatment";
 import { CommunicationService } from "../communication.service";
 
 @Component({
@@ -15,8 +16,9 @@ export class AnimalComponent {
   public ownerNumbers: number[] = [0, 1, 2, 3];
   public duplicateError: boolean = false;
   public animals: Animal[] = [];
+  public treatmentsHistory: Treatment[] = [];
 
-  public ngOnInit() { 
+  public ngOnInit() {
     this.getAnimals();
   }
 
@@ -35,9 +37,10 @@ export class AnimalComponent {
   }
   public findAnimalTreatments(input: string): void {
     console.log(input);
-    this.communicationService.getTreatmentsHistory().subscribe((res: any) => {
-      console.log(res);
-  });
+    this.communicationService.getTreatmentsHistory().subscribe((treatmentsHistory: Treatment[]) => {
+      this.treatmentsHistory = treatmentsHistory;
+    });
+    console.log(this.treatmentsHistory);
   }
 
   public getAnimals(): void {
