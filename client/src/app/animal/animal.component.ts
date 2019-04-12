@@ -17,6 +17,7 @@ export class AnimalComponent {
   public duplicateError: boolean = false;
   public animals: Animal[] = [];
   public treatmentsHistory: Treatment[] = [];
+  public animalsInfo: Animal[] = [];
 
   public ngOnInit(): void {
     this.getAnimals();
@@ -41,6 +42,13 @@ export class AnimalComponent {
     this.communicationService.getTreatmentsHistory(numAni).subscribe((treatmentsHistory: Treatment[]) => {
       this.treatmentsHistory = treatmentsHistory;
       console.log(this.treatmentsHistory);
+    });
+  }
+
+  public findAnimalInformation(nomAni: string): void {
+    this.communicationService.getAnimalInformation(nomAni).subscribe((animalsInfo: Animal[]) => {
+      this.animalsInfo = animalsInfo;
+      console.log(this.animalsInfo);
     });
   }
 

@@ -51,6 +51,16 @@ export class DatabaseService {
         return this.pool.query(treatmentsHistory);
     }
 
+    public getAnimalInformation(nomAni: string): Promise<pg.QueryResult> {
+        this.pool.connect();
+
+        const animalInformation: string = `
+        SELECT * FROM bdschema.Animal WHERE LOWER(bdschema.Animal.nom) LIKE '%` + nomAni + `%';
+        `;
+
+        return this.pool.query(animalInformation);
+    }
+
     public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
         this.pool.connect();
 

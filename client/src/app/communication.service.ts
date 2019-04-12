@@ -68,6 +68,13 @@ export class CommunicationService {
         );
     }
 
+    public getAnimalInformation(nomAni: string): Observable<Animal[]> {
+
+        return this.http.get<Animal[]>(this.BASE_URL + "/animalInformation/" + nomAni).pipe(
+            catchError(this.handleError<Animal[]>("findAnimalInformation")),
+        );
+    }
+
     private handleError<T>(request: string, result?: T): (error: Error) => Observable<T> {
 
         return (error: Error): Observable<T> => {
