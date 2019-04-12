@@ -5,6 +5,7 @@ import {Animal} from "../../../common/tables/Animal";
 import { of, Observable, concat, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Room } from "../../../common/tables/Room";
+import { Treatment } from "../../../common/tables/Treatment";
 
 @Injectable()
 export class CommunicationService {
@@ -62,7 +63,7 @@ export class CommunicationService {
 
     public getTreatmentsHistory(): Observable<any[]> {
 
-        return this.http.post<any>(this.BASE_URL + "/treatmentsHistory", []);
+        return this.http.post<Treatment[]>(this.BASE_URL + "/treatmentsHistory", []);
     }
 
     private handleError<T>(request: string, result?: T): (error: Error) => Observable<T> {

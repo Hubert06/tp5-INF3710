@@ -4,6 +4,7 @@ import * as pg from "pg";
 
 import {Animal} from "../../../common/tables/Animal";
 import {Room} from '../../../common/tables/Room';
+import { Treatment } from "../../../common/tables/Treatment";
 
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
@@ -38,8 +39,15 @@ export class DatabaseController {
         router.post("/treatmentsHistory",
                     (req: Request, res: Response, next: NextFunction) => {
                     this.databaseService.getTreatmentsHistory().then((result: pg.QueryResult) => {
-                    res.json(result);
-                    console.log(result);
+                    const treatmentsHistory: Treatment[] =
+                    result.rows.map((treatment: any) => (
+                        {
+                        numTraitement : treatment.numtraitement,
+                        description : treatment.description,
+                        cout : treatment.cout,
+                    }));
+                    console.log(treatmentsHistory);
+                    res.json(treatmentsHistory);
                 }).catch((e: Error) => {
                     console.error(e.stack);
                 });
