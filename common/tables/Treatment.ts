@@ -1,5 +1,5 @@
 export interface Treatment {
-    "numTraitement" : string;
+    "numtrait" : string;
     "description" : string;
     "cout" : string;
 }

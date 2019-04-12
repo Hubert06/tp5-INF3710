@@ -56,7 +56,9 @@ export class CommunicationService {
 
     public getTreatmentsHistory(): Observable<any[]> {
 
-        return this.http.post<Treatment[]>(this.BASE_URL + "/treatmentsHistory", []);
+        return this.http.get<Treatment[]>(this.BASE_URL + "/treatmentsHistory").pipe(
+            catchError(this.handleError<Animal[]>("findAnimalTreatments")),
+        );
     }
 
     private handleError<T>(request: string, result?: T): (error: Error) => Observable<T> {
