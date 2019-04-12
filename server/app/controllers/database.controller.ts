@@ -75,7 +75,7 @@ export class DatabaseController {
                 });
             });
 
-        router.get("/animal",
+        router.get("/ownerNumbers",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
                     this.databaseService.getOwnerNumbers().then((result: pg.QueryResult) => {

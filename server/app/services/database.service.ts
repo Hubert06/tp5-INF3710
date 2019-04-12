@@ -51,7 +51,7 @@ export class DatabaseService {
     public getOwnerNumbers(): Promise<pg.QueryResult> {
         this.pool.connect();
 
-        return this.pool.query('');
+        return this.pool.query(`SELECT bdschema.proprietaire.numprop FROM bdschema.proprietaire`);
     }
 
     // HOTEL
