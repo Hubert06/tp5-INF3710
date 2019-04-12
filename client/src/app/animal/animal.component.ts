@@ -37,10 +37,11 @@ export class AnimalComponent {
     });
   }
 
-  public findAnimalTreatments(input: string): void {
-    console.log(input);
-    this.communicationService.getTreatmentsHistory().subscribe((treatmentsHistory: Treatment[]) => {
+  public findAnimalTreatments(numAni: string): void {
+    console.log(numAni);
+    this.communicationService.getTreatmentsHistory(numAni).subscribe((treatmentsHistory: Treatment[]) => {
       this.treatmentsHistory = treatmentsHistory;
+      console.log(this.treatmentsHistory);
     });
   }
 

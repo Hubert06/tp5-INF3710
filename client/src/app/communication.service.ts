@@ -61,10 +61,10 @@ export class CommunicationService {
                       this.http.post<any>(this.BASE_URL + "/populateDb", []));
     }
 
-    public getTreatmentsHistory(): Observable<any[]> {
+    public getTreatmentsHistory(numAni: string): Observable<Treatment[]> {
 
-        return this.http.get<Treatment[]>(this.BASE_URL + "/treatmentsHistory").pipe(
-            catchError(this.handleError<Animal[]>("findAnimalTreatments")),
+        return this.http.get<Treatment[]>(this.BASE_URL + "/treatmentsHistory/" + numAni).pipe(
+            catchError(this.handleError<Treatment[]>("findAnimalTreatments")),
         );
     }
 
