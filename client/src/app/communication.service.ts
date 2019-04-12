@@ -22,10 +22,10 @@ export class CommunicationService {
        this._listners.next(filterBy);
     }
 
-    public getHotels(): Observable<any[]> {
+    public getAnimals(): Observable<any[]> {
 
-        return this.http.get<Animal[]>(this.BASE_URL + "/hotel").pipe(
-            catchError(this.handleError<Animal []>("getHotels")),
+        return this.http.get<Animal[]>(this.BASE_URL + "/animal").pipe(
+            catchError(this.handleError<Animal[]>("getAnimals")),
         );
     }
 
