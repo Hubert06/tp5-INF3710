@@ -67,6 +67,17 @@ export class DatabaseController {
                 });
             });
 
+        router.get("/animal",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    // Send the request to the service and send the response
+                    this.databaseService.getOwnerNumbers().then((result: pg.QueryResult) => {
+                    const ownerNumbers: number[] = result.rows.map((row: any) => row.numprop);
+                    res.json(ownerNumbers);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
         router.get("/hotel/hotelNo",
                    (req: Request, res: Response, next: NextFunction) => {
                       this.databaseService.getHotelNo().then((result: pg.QueryResult) => {

@@ -12,12 +12,13 @@ export class AnimalComponent {
 
   public constructor(private communicationService: CommunicationService) { }
 
-  public ownerNumbers: number[] = [0, 1, 2, 3];
+  public ownerNumbers: number[] = [];
   public duplicateError: boolean = false;
   public animals: Animal[] = [];
 
-  public ngOnInit() { 
+  public ngOnInit(): void {
     this.getAnimals();
+    this.getOwnerNumbers();
   }
 
   public insertAnimal(animalNo: string, animalName: string, animalCity: string): void {
@@ -33,6 +34,7 @@ export class AnimalComponent {
         this.duplicateError = (res === -1);
     });
   }
+
   public findAnimalTreatments(input: string): void {
     console.log(input);
     this.communicationService.getTreatmentsHistory().subscribe((res: any) => {
@@ -45,6 +47,12 @@ export class AnimalComponent {
         this.cutDatesAnimals(animals);
         this.animals = animals;
     });
+  }
+
+  public getOwnerNumbers(): void {
+    this.communicationService.getOwnerNumbers().subscribe((ownerNumbers: number[]) => {
+      this.ownerNumbers = ownerNumbers;
+  });
   }
 
   private cutDatesAnimals(animals: Animal[]): void {

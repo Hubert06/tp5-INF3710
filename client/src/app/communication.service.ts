@@ -29,6 +29,13 @@ export class CommunicationService {
         );
     }
 
+    public getOwnerNumbers(): Observable<number[]> {
+
+        return this.http.get<number[]>(this.BASE_URL + "/ownerNumbers").pipe(
+            catchError(this.handleError<number[]>("getOwnerNumbers")),
+        );
+    }
+
     public getHotelPKs(): Observable<string[]> {
 
         return this.http.get<string[]>(this.BASE_URL + "/hotel/hotelNo").pipe(
