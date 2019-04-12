@@ -37,9 +37,10 @@ export class AnimalComponent {
     });
   }
 
-  public findAnimalTreatments(input: string): void {
-    this.communicationService.getTreatmentsHistory().subscribe((treatmentsHistory: Treatment[]) => {
+  public findAnimalTreatments(numAni: string): void {
+    this.communicationService.getTreatmentsHistory(numAni).subscribe((treatmentsHistory: Treatment[]) => {
       this.treatmentsHistory = treatmentsHistory;
+      console.log(this.treatmentsHistory);
     });
   }
 

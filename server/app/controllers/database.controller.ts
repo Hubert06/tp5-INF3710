@@ -36,9 +36,10 @@ export class DatabaseController {
                     });
         });
 
-        router.get("/treatmentsHistory",
+        router.get("/treatmentsHistory/:numAni",
                    (req: Request, res: Response, next: NextFunction) => {
-                    this.databaseService.getTreatmentsHistory().then((result: pg.QueryResult) => {
+                    const numAni: string = req.params.numAni;
+                    this.databaseService.getTreatmentsHistory(numAni).then((result: pg.QueryResult) => {
                     const treatmentsHistory: Treatment[] =
                     result.rows.map((treatment: any) => (
                         {

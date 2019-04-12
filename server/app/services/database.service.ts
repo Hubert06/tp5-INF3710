@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { Room } from "../../../common/tables/Room";
 import { schema } from "../createSchema";
 import { data } from "../populateDB";
-import { treatmentsHistory } from "../treatmentsHistory";
+// import { treatmentsHistory } from "../treatmentsHistory";
 
 @injectable()
 export class DatabaseService {
@@ -36,8 +36,17 @@ export class DatabaseService {
         return this.pool.query(data);
     }
 
-    public getTreatmentsHistory(): Promise<pg.QueryResult> {
+    public getTreatmentsHistory(numAni: string): Promise<pg.QueryResult> {
         this.pool.connect();
+
+        const treatmentsHistory: string = `
+        SELECT Traitement.numTrait, Traitement.description, Traitement.cout FROM bdschema.Traitement
+        LEFT JOIN bdschema.Prescription ON Traitement.numTrait = bdschema.Prescription.numTrait
+        LEFT JOIN bdschema.Examen ON Prescription.numExam = bdschema.Examen.numExam
+        LEFT JOIN bdschema.Animal ON Examen.numAni = bdschema.Animal.numAni
+        LEFT JOIN bdschema.Proprietaire ON Animal.numProp = bdschema.Proprietaire.numProp
+        WHERE LOWER(bdschema.Animal.numAni) = LOWER('` + numAni + `');
+        `;
 
         return this.pool.query(treatmentsHistory);
     }
