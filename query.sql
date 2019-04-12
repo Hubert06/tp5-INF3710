@@ -15,7 +15,7 @@ LEFT JOIN Animal ON Proprietaire.numProp = Animal.numProp
 WHERE Proprietaire.numClinique = 'C001';
 
 -- 4) Lister l’ensemble des examens d’un animal donné
-
+SELECT * FROM examen WHERE (examen.numAni = "A101");
 
 -- 5) Lister le détail des traitements d’un animal suite à un examen donné
 SELECT Traitement.numTrait, Traitement.description, Traitement.cout, Prescription.numExam, Prescription.qte, Prescription.dateDebut, Prescription.dateFin FROM Traitement 
@@ -24,7 +24,7 @@ ON Prescription.numExam = 'EX101'
 WHERE Traitement.numTrait = Prescription.numTrait;
 
 -- 6) Lister le salaire total des employés par clinique ordonné par numéro de clinique
-
+SELECT numClinique, SUM(salaire) AS salaireTotal FROM employe GROUP BY numClinique ORDER BY numClinique;
 
 -- 7) Lister le nombre total d’animaux d’un type donné (vous pouvez le choisir) dans chaque
 -- clinique
@@ -34,19 +34,24 @@ WHERE Animal.type = 'Labrador'
 GROUP BY Proprietaire.numClinique;
 
 -- 8) Lister le coût minimum, maximum et moyen des traitements.
-
+SELECT MIN(cout) as coutMinimum, MAX(cout) AS coutMaximum, AVG(cout) AS coutMoyen FROM traitement;
 
 -- 9) Quels sont les noms des employés de plus de 50 ans ordonnés par nom ?
 SELECT nom FROM Employe WHERE dob < '1969-04-14' ORDER BY nom;
 
 -- 10) Quels sont les propriétaires dont le nom contient « blay » ?
-
+SELECT * FROM proprietaire WHERE LOWER(nom) LIKE '%blay%';
 
 -- 11) Supprimez le vétérinaire « Jean Tremblay »
 DELETE FROM Employe WHERE fonction = 'Veterinaire' AND nom = 'Jean Tremblay';
 
 -- 12) Lister les détails des propriétaires qui ont un chat et un chien
-
+SELECT * FROM proprietaire WHERE numProp IN 
+    (
+        SELECT numProp FROM animal WHERE type = 'chat'
+        INTERSECT
+        SELECT numProp FROM animal WHERE type = 'chien'
+    );
 
 -- 13) Lister les détails des propriétaires qui ont un chat ou un chien
 SELECT * FROM proprietaire WHERE numProp IN 
