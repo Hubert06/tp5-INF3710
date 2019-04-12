@@ -22,9 +22,9 @@ INSERT INTO bdschema.Proprietaire VALUES ('P301', 'C002', 'Bob Tremb', '234 rue 
 
 
 INSERT INTO bdschema.Animal VALUES ('A101', 'P101', 'Pedro', 'chat', 'Gros et feroce', '2001-01-01', '2019-01-01', 'vivant');
-INSERT INTO bdschema.Animal VALUES ('A102', 'P101', 'Juan', 'Labrador', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'decede');
-INSERT INTO bdschema.Animal VALUES ('A201', 'P201', 'Carlos', 'Chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
-INSERT INTO bdschema.Animal VALUES ('A202', 'P201', 'Emilio', 'Tortue', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A102', 'P101', 'Juan', 'tortue', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A201', 'P201', 'Carlos', 'chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
+INSERT INTO bdschema.Animal VALUES ('A202', 'P201', 'Emilio', 'chien', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 
 INSERT INTO bdschema.Examen VALUES ('EX101', 'E103', 'A101', '2019-03-03', '12:00', 'Examen general');
 INSERT INTO bdschema.Examen VALUES ('EX102', 'E103', 'A102', '2019-04-04', '18:00', 'Examen general');

@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Examen (
     heure VARCHAR(5),
     description VARCHAR(30),
     PRIMARY KEY (numExam),
-    FOREIGN KEY (numVeterinaire) REFERENCES bdschema.Veterinaire(numEmp),
+    FOREIGN KEY (numVeterinaire) REFERENCES bdschema.Veterinaire(numEmp) ON DELETE CASCADE,
     FOREIGN KEY (numAni) REFERENCES bdschema.Animal(numAni)
 );
 
@@ -87,5 +87,5 @@ CREATE TABLE IF NOT EXISTS bdschema.Prescription (
     dateFin DATE,
     PRIMARY KEY (numTrait, numExam),
     FOREIGN KEY (numTrait) REFERENCES bdschema.Traitement(numTrait),
-    FOREIGN KEY (numExam) REFERENCES bdschema.Examen(numExam)
+    FOREIGN KEY (numExam) REFERENCES bdschema.Examen(numExam) ON DELETE CASCADE
 );

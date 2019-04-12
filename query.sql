@@ -15,7 +15,7 @@ LEFT JOIN Animal ON Proprietaire.numProp = Animal.numProp
 WHERE Proprietaire.numClinique = 'C001';
 
 -- 4) Lister l’ensemble des examens d’un animal donné
-SELECT * FROM examen WHERE (examen.numAni = "A101");
+SELECT * FROM examen WHERE (examen.numAni = 'A101');
 
 -- 5) Lister le détail des traitements d’un animal suite à un examen donné
 SELECT Traitement.numTrait, Traitement.description, Traitement.cout, Prescription.numExam, Prescription.qte, Prescription.dateDebut, Prescription.dateFin FROM Traitement 
@@ -28,9 +28,9 @@ SELECT numClinique, SUM(salaire) AS salaireTotal FROM employe GROUP BY numCliniq
 
 -- 7) Lister le nombre total d’animaux d’un type donné (vous pouvez le choisir) dans chaque
 -- clinique
-SELECT COUNT(*) FROM Animal
+SELECT Proprietaire.numClinique, COUNT(*) AS nbrDeChat FROM Animal
 LEFT JOIN Proprietaire ON Animal.numProp = Proprietaire.numProp
-WHERE Animal.type = 'Labrador'
+WHERE Animal.type = 'chat'
 GROUP BY Proprietaire.numClinique;
 
 -- 8) Lister le coût minimum, maximum et moyen des traitements.
