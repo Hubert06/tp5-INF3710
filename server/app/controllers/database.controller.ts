@@ -54,6 +54,28 @@ export class DatabaseController {
                 });
             });
 
+        router.get("/animalInformation/:nomAni",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    const nomAni: string = req.params.nomAni;
+                    this.databaseService.getAnimalInformation(nomAni).then((result: pg.QueryResult) => {
+                    const animal: Animal[] =
+                    result.rows.map((ani: any) => (
+                        {
+                        num : ani.numani,
+                        name : ani.nom,
+                        type : ani.type,
+                        desc : ani.description,
+                        dob : ani.dob,
+                        doi : ani.dateinsc,
+                        state : ani.etat,
+                        ownerNum : ani.numprop,
+                    }));
+                    res.json(animal);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
         router.get("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
