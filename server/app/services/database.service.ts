@@ -61,6 +61,21 @@ export class DatabaseService {
         return this.pool.query(animalInformation);
     }
 
+    public getBill(numAni: string): Promise<pg.QueryResult> {
+        this.pool.connect();
+
+        const bill: string = `
+        SELECT SUM(bdschema.Traitement.cout) AS totalbill FROM bdschema.Traitement
+        LEFT JOIN bdschema.Prescription ON Traitement.numTrait = bdschema.Prescription.numTrait
+        LEFT JOIN bdschema.Examen ON Prescription.numExam = bdschema.Examen.numExam
+        LEFT JOIN bdschema.Animal ON Examen.numAni = bdschema.Animal.numAni
+        LEFT JOIN bdschema.Proprietaire ON Animal.numProp = bdschema.Proprietaire.numProp
+        WHERE LOWER(bdschema.Animal.numAni) = LOWER('` + numAni + `');
+        `;
+
+        return this.pool.query(bill);
+    }
+
     public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
         this.pool.connect();
 
