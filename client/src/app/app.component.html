@@ -16,31 +16,35 @@
 <router-outlet></router-outlet>
 
 <div *ngIf="route == '' || route == '/treatment'" id="ht">
-    <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
-    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-      <table id ="ht" class="table table-bordered table-striped mb-0" align="center" border="1" width="1000" height="50">
-        <thead>
-          <th> Number </th>
-          <th> Name </th>
-          <th> Type </th>
-          <th> Description </th>
-          <th> Date of birth </th>
-          <th> Date of inscription </th>
-          <th> State </th>
-          <th> Owner number </th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let animal of animals">
-            <td> {{animal.num}}</td>
-            <td> {{animal.name}}</td>
-            <td> {{animal.type}}</td>
-            <td> {{animal.desc}}</td>
-            <td> {{animal.dob}}</td>
-            <td> {{animal.doi}}</td>
-            <td> {{animal.state}}</td>
-            <td> {{animal.ownerNum}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="flexCenter">
+      <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
+    </div>
+    <div class="flexCenter">
+      <div id="table" class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table id ="ht" class="table table-bordered table-striped mb-0" align="center" border="1" >
+          <thead>
+            <th> Number </th>
+            <th> Name </th>
+            <th> Type </th>
+            <th> Description </th>
+            <th> Date of birth </th>
+            <th> Date of inscription </th>
+            <th> State </th>
+            <th> Owner number </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let animal of animals">
+              <td> {{animal.num}}</td>
+              <td> {{animal.name}}</td>
+              <td> {{animal.type}}</td>
+              <td> {{animal.desc}}</td>
+              <td> {{animal.dob}}</td>
+              <td> {{animal.doi}}</td>
+              <td> {{animal.state}}</td>
+              <td> {{animal.ownerNum}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>

@@ -10,6 +10,17 @@
 #ht{
     margin-top: 20px;
 }
+
 .title {
     color: red;
-  }
+}
+
+#table {
+    width: 80%;
+    height: 200px;
+}
+
+.flexCenter {
+    display:flex; 
+    justify-content: center;
+}
