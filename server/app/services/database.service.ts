@@ -51,12 +51,12 @@ export class DatabaseService {
 
     public getAnimalInformation(nomAni: string): Promise<pg.QueryResult> {
         this.pool.connect();
-
+        const values: string[] = [`%` + nomAni + `%`];
         const animalInformation: string = `
-        SELECT * FROM bdschema.Animal WHERE LOWER(bdschema.Animal.nom) LIKE '%` + nomAni + `%';
+        SELECT * FROM bdschema.Animal WHERE LOWER(bdschema.Animal.nom) LIKE $1;
         `;
 
-        return this.pool.query(animalInformation);
+        return this.pool.query(animalInformation, values);
     }
 
     public getBill(numAni: string): Promise<pg.QueryResult> {
@@ -77,74 +77,85 @@ export class DatabaseService {
     public insertAnimal(num: string, name: string, type: string, desc: string, dob: string, doi: string,
                         state: string, ownerNum: string): Promise<pg.QueryResult> {
         this.pool.connect();
+        const values: string[] = [
+            num,
+            ownerNum,
+            name,
+            type,
+            desc,
+            dob,
+            doi,
+            state
+            ];
         let insertion: string = ``;
         if (ownerNum !== undefined && name !== `` && type !== `` && desc !== `` && dob !== `` && doi !== `` && state !== ``) {
             insertion = `
-            INSERT INTO bdschema.Animal VALUES ('` + num + `', '` + ownerNum + `', '` + name + `', '
-            ` + type + `', '` + desc + `', '` + dob + `', '` + doi + `', '` + state + `');
+            INSERT INTO bdschema.Animal VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
             `;
         }
 
-        return this.pool.query(insertion);
+        return this.pool.query(insertion, values);
     }
 
     public modifyAnimal(num: string, name: string, type: string, desc: string, dob: string, doi: string,
                         state: string, ownerNum: string): Promise<pg.QueryResult> {
         this.pool.connect();
 
-        let queryIsFine: boolean = false;
+        if (ownerNum === undefined) {
+            ownerNum = ``;
+        }
+        let values: string[] = [num];
         let modification: string = `
         UPDATE bdschema.Animal
         SET
         `;
 
-        if (ownerNum !== undefined) {
-            queryIsFine = true;
-            modification += (`numProp = '` + ownerNum + `',`);
+        if (ownerNum !== ``) {
+            values.push(ownerNum);
+            modification += (`numProp = $2,`);
         }
         if (name !== ``) {
-            queryIsFine = true;
-            modification += (`nom = '` + name + `',`);
+            values.push(name);
+            modification += (`nom = $3,`);
         }
         if (type !== ``) {
-            queryIsFine = true;
-            modification += (`type = '` + type + `',`);
+            values.push(type);
+            modification += (`type = $4,`);
         }
         if (desc !== ``) {
-            queryIsFine = true;
-            modification += (`description = '` + desc + `',`);
+            values.push(desc);
+            modification += (`description = $5,`);
         }
         if (dob !== ``) {
-            queryIsFine = true;
-            modification += (`dob = '` + dob + `',`);
+            values.push(dob);
+            modification += (`dob = $6,`);
         }
         if (doi !== ``) {
-            queryIsFine = true;
-            modification += (`dateInsc = '` + doi + `',`);
+            values.push(doi);
+            modification += (`dateInsc = $7,`);
         }
         if (state !== ``) {
-            queryIsFine = true;
-            modification += (`etat = '` + state + `',`);
+            values.push(state);
+            modification += (`etat = $8,`);
         }
         modification = modification.substring(0, modification.length - 1);
-        modification += (`WHERE numAni = '` + num + `';`);
+        modification += (` WHERE numAni = $1;`);
+        console.log(values);
+        console.log(modification);
 
-        if(!queryIsFine) {
-            throw new Error("Invalid input");
-        }
-        return this.pool.query(modification);
+        return this.pool.query(modification, values);
     }
 
     public deleteAnimal(num: string): Promise<pg.QueryResult> {
         this.pool.connect();
 
+        const values: string[] = [num];
+
         const deletion: string = `
-        DELETE FROM bdschema.Animal WHERE Animal.numAni = '` + num + `';
+        DELETE FROM bdschema.Animal WHERE Animal.numAni = $1;
         `;
 
-        console.log(deletion);
-
-        return this.pool.query(deletion);
+        return this.pool.query(deletion, values);
     }
 
     public getOwnerNumbers(): Promise<pg.QueryResult> {
