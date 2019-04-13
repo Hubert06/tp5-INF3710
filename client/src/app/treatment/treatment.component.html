@@ -2,7 +2,10 @@
   <div style="text-align: left">
     <h2> Find an animal treatments history :</h2>
     numAnimal : <input class="form-control col-md-4" #numAnimalTreatment>
-    <button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find </button>
+    <div style="display: flex; flex-direction: row">
+      <button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find treatments </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" (click)="findBill(numAnimalTreatment.value)"> Get total bill cost </button>
+    </div>
   </div>
   <div>
     <h2>Treatments of {{currentAnimal}}</h2>
@@ -20,6 +23,10 @@
         </tr>
       </tbody>
     </table>
+    <p></p>
+    <p></p>
+    <div >
+      <h2>Total bill cost of {{currentAnimal}} : {{billCost}}</h2>
+    </div>
   </div>
 </div>
-

@@ -10,11 +10,19 @@ import { CommunicationService } from "../communication.service";
 export class TreatmentComponent implements OnInit {
   public treatments: Treatment[];
   public currentAnimal: string;
+  public billCost: number;
 
   public constructor(private communicationService: CommunicationService) { }
 
   public ngOnInit(): void {
     
+  }
+
+  public findBill(numAni: string): void {
+    this.communicationService.getBill(numAni).subscribe((bill: number[]) => {
+      this.billCost = bill[0];
+      console.log(this.billCost);
+    });
   }
 
   public findAnimalTreatments(numAni: string): void {

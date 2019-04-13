@@ -40,14 +40,6 @@ export class AnimalComponent {
   public findAnimalInformation(nomAni: string): void {
     this.communicationService.getAnimalInformation(nomAni).subscribe((animalsInfo: Animal[]) => {
       this.animalsInfo = animalsInfo;
-      console.log(this.animalsInfo);
-    });
-  }
-
-  public findBill(numAni: string): void {
-    this.communicationService.getBill(numAni).subscribe((bill: number[]) => {
-      this.bill = bill[0];
-      console.log(this.bill);
     });
   }
 

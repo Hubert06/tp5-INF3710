@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Proprietaire (
     nom VARCHAR(30),
     adresse VARCHAR(30),
     numTelephone VARCHAR(15),
-    PRIMARY KEY (numProp),
+    PRIMARY KEY (numProp, numClinique),
     FOREIGN KEY (numClinique) REFERENCES bdschema.Clinique(numClinique)
 );
 
