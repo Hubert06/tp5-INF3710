@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS bdschema.Proprietaire (
     nom VARCHAR(30),
     adresse VARCHAR(30),
     numTelephone VARCHAR(15),
-    PRIMARY KEY (numProp, numClinique),
-    FOREIGN KEY (numClinique) REFERENCES bdschema.Clinique(numClinique)
+    PRIMARY KEY (numProp),
+    FOREIGN KEY (numClinique) REFERENCES bdschema.Clinique(numClinique) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Animal (

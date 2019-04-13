@@ -14,11 +14,15 @@
       State : <input  class="form-control col-md-4" #animalState>
       <p></p>
       Owner number :
-      <select>
+      <select [(ngModel)]="owner">
           <option *ngFor="let ownerNumber of ownerNumbers" value={{ownerNumber}}>{{ownerNumber}}</option>
       </select>
       <p></p>
-    <button type="button" class="btn btn-primary" (click)="insertHotel(hotelNo.value,hotelName.value, hotelCity.value)"> Add Hotel</button>
+    <button type="button" class="btn btn-primary" (click)="insertAnimal(numAnimal.value, animalName.value, animalType.value, animalDesc.value,
+    animalDob.value, animalDoi.value, animalState.value, owner)"> Insert animal</button>
+    <button type="button" class="btn btn-primary" (click)="modifyAnimal(numAnimal.value, animalName.value, animalType.value, animalDesc.value,
+    animalDob.value, animalDoi.value, animalState.value, owner)"> Modify animal</button>
+    <button type="button" class="btn btn-primary" (click)="deleteAnimal(numAnimal.value)"> Delete animal</button>
   </div> 
   <div>
       <div id="ht">
