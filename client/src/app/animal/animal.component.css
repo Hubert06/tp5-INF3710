@@ -22,3 +22,9 @@
 .table-wrapper-scroll-y {
     display: block;
 }
+
+#topOfTable { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -40,9 +40,9 @@ export class AnimalComponent {
   // }
 
   public findAnimalInformation(nomAni: string): void {
-    this.communicationService.getAnimalInformation(nomAni).subscribe((animalsInfo: Animal[]) => {
-      this.cutDatesAnimals(animalsInfo);
-      this.animalsInfo = animalsInfo;
+    this.communicationService.getAnimalInformation(nomAni).subscribe((animals: Animal[]) => {
+      this.cutDatesAnimals(animals);
+      this.animals = animals;
     });
   }
 

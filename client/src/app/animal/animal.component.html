@@ -21,9 +21,17 @@
     <button type="button" class="btn btn-primary" (click)="insertHotel(hotelNo.value,hotelName.value, hotelCity.value)"> Add Hotel</button>
   </div> 
   <div>
-      <div id="ht">
-          <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
-          <p></p>
+      <div>
+          <div id="topOfTable">
+            <div>
+              <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
+            </div>
+            <div >
+              Filter animals with the name or a part of the name : 
+              <input class="form-control col-md-4" #animalNameInfos>
+              <button type="button" class="btn btn-primary" (click)="findAnimalInformation(animalNameInfos.value)">Filter</button>
+            </div>
+          </div>
           <p></p>
           <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table id ="ht" class="table table-bordered table-striped mb-0">
@@ -54,11 +62,11 @@
         </div>
   </div>
 </div>
-<p></p>
+<!-- <p></p>
 <div id="animal">
   <div>
     <h2> Find information on an animal :</h2>
-    Name of the animal : <input class="form-control col-md-4" #animalNameInfos>
+    Name of the animal : <input class="form-control col-md-4" >
     <button type="button" class="btn btn-primary" (click)="findAnimalInformation(animalNameInfos.value)"> Find </button>
   </div>
   <div class="table-wrapper-scroll-y my-custom-scrollbar-2">
@@ -88,4 +96,4 @@
     </table>
   </div>
 </div>
-  
+   -->
