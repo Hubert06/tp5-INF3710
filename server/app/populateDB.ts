@@ -22,11 +22,21 @@ INSERT INTO bdschema.Proprietaire VALUES ('P101', 'C001', 'Gino Tremblay', '123 
 INSERT INTO bdschema.Proprietaire VALUES ('P201', 'C002', 'Camille Tremblay', '234 rue des Tremblay', '450-234-5678');
 INSERT INTO bdschema.Proprietaire VALUES ('P301', 'C002', 'Bob Tremb', '234 rue des Tremblay', '450-234-5678');
 
-
 INSERT INTO bdschema.Animal VALUES ('A101', 'P101', 'Pedro', 'chat', 'Gros et feroce', '2001-01-01', '2019-01-01', 'vivant');
 INSERT INTO bdschema.Animal VALUES ('A102', 'P101', 'Juan', 'tortue', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A103', 'P101', 'Praline', 'poisson', 'Gros et feroce', '2001-01-01', '2019-01-01', 'vivant');
+INSERT INTO bdschema.Animal VALUES ('A104', 'P101', 'Bertrand', 'rat', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A105', 'P101', 'George', 'hipocampe', 'Gros et feroce', '2001-01-01', '2019-01-01', 'vivant');
+INSERT INTO bdschema.Animal VALUES ('A106', 'P101', 'Bella', 'lezard', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'decede');
 INSERT INTO bdschema.Animal VALUES ('A201', 'P201', 'Carlos', 'chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
 INSERT INTO bdschema.Animal VALUES ('A202', 'P201', 'Emilio', 'chien', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A203', 'P201', 'bob', 'oiseau', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
+INSERT INTO bdschema.Animal VALUES ('A204', 'P201', 'gino', 'chienchilla', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A205', 'P201', 'ginette', 'hamster', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
+INSERT INTO bdschema.Animal VALUES ('A206', 'P201', 'bernard', 'serpent', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A301', 'P301', 'julie', 'serpent', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A302', 'P301', 'Mike', 'singe', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A303', 'P301', 'Marie', 'lion', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 
 INSERT INTO bdschema.Examen VALUES ('EX101', 'E103', 'A101', '2019-03-03', '12:00', 'Examen general');
 INSERT INTO bdschema.Examen VALUES ('EX102', 'E103', 'A102', '2019-04-04', '18:00', 'Examen general');

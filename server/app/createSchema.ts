@@ -4,7 +4,7 @@ DROP SCHEMA IF EXISTS bdschema CASCADE;
 CREATE SCHEMA bdschema;
 
 CREATE TABLE IF NOT EXISTS bdschema.Clinique (
-    numClinique VARCHAR(10),
+    numClinique VARCHAR(10) UNIQUE,
     adresse VARCHAR(30),
     numTelephone VARCHAR(15),
     numTelecopieur VARCHAR(15),
@@ -12,14 +12,14 @@ CREATE TABLE IF NOT EXISTS bdschema.Clinique (
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Employe (
-    numEmp VARCHAR(10),
+    numEmp VARCHAR(10) UNIQUE,
     numClinique VARCHAR(10),
     nom VARCHAR(30),
     adresse VARCHAR(30),
     numTelephone VARCHAR(15),
     dob DATE,
     sexe VARCHAR(1) CHECK (sexe = 'M' OR sexe = 'F'),
-    nas VARCHAR(10),
+    nas VARCHAR(10) UNIQUE,
     fonction VARCHAR(30),
     salaire NUMERIC,
     PRIMARY KEY (numEmp),
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Proprietaire (
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Animal (
-    numAni VARCHAR(10),
+    numAni VARCHAR(10) UNIQUE,
     numProp VARCHAR(10),
     nom VARCHAR(30),
     type VARCHAR(30),

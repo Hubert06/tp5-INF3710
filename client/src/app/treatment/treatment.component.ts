@@ -9,8 +9,9 @@ import { CommunicationService } from "../communication.service";
 })
 export class TreatmentComponent implements OnInit {
   public treatments: Treatment[];
-  public currentAnimal: string;
-  public billCost: number;
+  public currentAnimalTreatments: string;
+  public currentAnimalBillcost: string;
+  public billCost: string;
 
   public constructor(private communicationService: CommunicationService) { }
 
@@ -20,13 +21,13 @@ export class TreatmentComponent implements OnInit {
 
   public findBill(numAni: string): void {
     this.communicationService.getBill(numAni).subscribe((bill: number[]) => {
-      this.billCost = bill[0];
-      console.log(this.billCost);
+      this.currentAnimalBillcost = numAni;
+      this.billCost = bill[0] + "$";
     });
   }
 
   public findAnimalTreatments(numAni: string): void {
-    this.currentAnimal = numAni;
+    this.currentAnimalTreatments = numAni;
     this.communicationService.getTreatmentsHistory(numAni).subscribe((treatments: Treatment[]) => {
       this.treatments = treatments;
       console.log(this.treatments);

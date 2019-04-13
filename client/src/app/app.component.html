@@ -20,8 +20,9 @@
       <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
     </div>
     <div class="flexCenter">
-      <div id="table" class="table-wrapper-scroll-y my-custom-scrollbar">
-        <table id ="ht" class="table table-bordered table-striped mb-0" align="center" border="1" >
+        <!-- https://mdbootstrap.com/docs/jquery/tables/scroll/ -->
+      <div id ="table" class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table  class="table table-bordered table-striped mb-0" >
           <thead>
             <th> Number </th>
             <th> Name </th>
