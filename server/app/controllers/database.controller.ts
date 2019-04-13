@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
-
 import {Animal} from "../../../common/tables/Animal";
 import {Room} from '../../../common/tables/Room';
 import { Treatment } from "../../../common/tables/Treatment";
@@ -47,7 +46,6 @@ export class DatabaseController {
                         description : treatment.description,
                         cout : treatment.cout,
                     }));
-                    console.log(treatmentsHistory);
                     res.json(treatmentsHistory);
                 }).catch((e: Error) => {
                     console.error(e.stack);
@@ -71,6 +69,17 @@ export class DatabaseController {
                         ownerNum : ani.numprop,
                     }));
                     res.json(animal);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
+        router.get("/bill/:numAni",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    const numAni: string = req.params.numAni;
+                    this.databaseService.getBill(numAni).then((result: pg.QueryResult) => {
+                    const totalbill: number[] = result.rows.map((row: any) => row.totalbill);
+                    res.json(totalbill);
                 }).catch((e: Error) => {
                     console.error(e.stack);
                 });

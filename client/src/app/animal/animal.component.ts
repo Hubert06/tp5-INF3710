@@ -18,6 +18,7 @@ export class AnimalComponent {
   public animals: Animal[] = [];
   public treatmentsHistory: Treatment[] = [];
   public animalsInfo: Animal[] = [];
+  public bill: number;
 
   public ngOnInit(): void {
     this.getAnimals();
@@ -49,6 +50,13 @@ export class AnimalComponent {
     this.communicationService.getAnimalInformation(nomAni).subscribe((animalsInfo: Animal[]) => {
       this.animalsInfo = animalsInfo;
       console.log(this.animalsInfo);
+    });
+  }
+
+  public findBill(numAni: string): void {
+    this.communicationService.getBill(numAni).subscribe((bill: number[]) => {
+      this.bill = bill[0];
+      console.log(this.bill);
     });
   }
 

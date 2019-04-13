@@ -75,6 +75,13 @@ export class CommunicationService {
         );
     }
 
+    public getBill(numAni: string): Observable<number[]> {
+
+        return this.http.get<number[]>(this.BASE_URL + "/bill/" + numAni).pipe(
+            catchError(this.handleError<number[]>("findBill")),
+        );
+    }
+
     private handleError<T>(request: string, result?: T): (error: Error) => Observable<T> {
 
         return (error: Error): Observable<T> => {
