@@ -1,32 +1,37 @@
 <div id="treatment">
   <div style="text-align: left">
     <h2> Find an animal treatments history :</h2>
-    numAnimal : <input class="form-control col-md-4" #numAnimalTreatment>
+    <p></p>
+    numAnimal : 
+    <p></p>
+    <input class="form-control col-md-4" #numAnimalTreatment>
+    <p></p>
     <div style="display: flex; flex-direction: row">
       <button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find treatments </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button type="button" class="btn btn-primary" (click)="findBill(numAnimalTreatment.value)"> Get total bill cost </button>
     </div>
   </div>
   <div>
-    <h2>Treatments of {{currentAnimal_treatments}}</h2>
-    <table id ="ht" align="center" border="1" width="500">
-      <thead>
-        <th> Number </th>
-        <th> Description </th>
-        <th> Cost </th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let treatment of treatments">
-          <td> {{treatment.numtrait}}</td>
-          <td> {{treatment.description}}</td>
-          <td> {{treatment.cout}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <h2>Treatments of {{currentAnimalTreatments}} : </h2>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar-t">
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <th> Number </th>
+          <th> Description </th>
+          <th> Cost </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let treatment of treatments">
+            <td> {{treatment.numtrait}}</td>
+            <td> {{treatment.description}}</td>
+            <td> {{treatment.cout}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <p></p>
-    <p></p>
-    <div >
-      <h2>Total bill cost of {{currentAnimal_billcost}} : {{billCost}}</h2>
+    <div>
+      <h2>Total bill cost of {{currentAnimalBillcost}} : {{billCost}}</h2>
     </div>
   </div>
 </div>

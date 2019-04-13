@@ -12,6 +12,13 @@
     overflow: auto;
 }
 
+.my-custom-scrollbar-2 {
+    position: relative;
+    height: 200px;
+    width: 50%;
+    overflow: auto;
+}
+
 .table-wrapper-scroll-y {
     display: block;
 }

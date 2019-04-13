@@ -41,6 +41,7 @@ export class AnimalComponent {
 
   public findAnimalInformation(nomAni: string): void {
     this.communicationService.getAnimalInformation(nomAni).subscribe((animalsInfo: Animal[]) => {
+      this.cutDatesAnimals(animalsInfo);
       this.animalsInfo = animalsInfo;
     });
   }

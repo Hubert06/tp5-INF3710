@@ -3,3 +3,10 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+.my-custom-scrollbar-t {
+    position: relative;
+    height: 150px;
+    width: 100%;
+    overflow: auto;
+}

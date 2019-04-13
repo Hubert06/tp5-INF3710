@@ -61,7 +61,7 @@
     Name of the animal : <input class="form-control col-md-4" #animalNameInfos>
     <button type="button" class="btn btn-primary" (click)="findAnimalInformation(animalNameInfos.value)"> Find </button>
   </div>
-  <div>
+  <div class="table-wrapper-scroll-y my-custom-scrollbar-2">
     <table id ="ht" class="table table-bordered table-striped mb-0">
       <thead>
         <th> Number </th>
@@ -75,14 +75,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let animal of animalsInfo">
-          <td> {{animal.num}}</td>
-          <td> {{animal.name}}</td>
-          <td> {{animal.type}}</td>
-          <td> {{animal.desc}}</td>
-          <td> {{animal.dob}}</td>
-          <td> {{animal.doi}}</td>
-          <td> {{animal.state}}</td>
-          <td> {{animal.ownerNum}}</td>
+          <td> {{animal.num}} </td>
+          <td> {{animal.name}} </td>
+          <td> {{animal.type}} </td>
+          <td> {{animal.desc}} </td>
+          <td> {{animal.dob}} </td>
+          <td> {{animal.doi}} </td>
+          <td> {{animal.state}} </td>
+          <td> {{animal.ownerNum}} </td>
         </tr>
       </tbody>
     </table>
