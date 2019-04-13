@@ -17,9 +17,11 @@ export class AnimalComponent {
   public duplicateError: boolean = false;
   public treatmentsHistory: Treatment[] = [];
   public animalsInfo: Animal[] = [];
+  public animals: Animal[] = [];
   public bill: number;
 
   public ngOnInit(): void {
+    this.getAnimals();
     this.getOwnerNumbers();
   }
 
@@ -43,9 +45,23 @@ export class AnimalComponent {
     });
   }
 
+  public getAnimals(): void {
+    this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
+        this.cutDatesAnimals(animals);
+        this.animals = animals;
+    });
+  }
+
   public getOwnerNumbers(): void {
     this.communicationService.getOwnerNumbers().subscribe((ownerNumbers: number[]) => {
       this.ownerNumbers = ownerNumbers;
   });
+  }
+
+  private cutDatesAnimals(animals: Animal[]): void {
+    for (const ani of animals) {
+      ani.dob = (ani.dob as string).substring(0,10);
+      ani.doi = (ani.doi as string).substring(0,10);
+    }
   }
 }

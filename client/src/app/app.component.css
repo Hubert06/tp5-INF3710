@@ -7,7 +7,7 @@
     margin-bottom: 10px;
 }
 
-#ht{
+#table{
     margin-top: 20px;
 }
 
@@ -15,12 +15,18 @@
     color: red;
 }
 
-#table {
-    width: 80%;
-    height: 200px;
-}
-
 .flexCenter {
     display:flex; 
     justify-content: center;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 500px;
+    width: 50%;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
 }

@@ -12,6 +12,7 @@ import { Animal } from "../../../common/tables/Animal";
 export class AppComponent implements OnInit {
     public route: string;
     public animals: Animal[];
+    public readonly title: string = "INF3710 TP5";
 
     public constructor(private communicationService: CommunicationService, location: Location, router: Router) {
         router.events.subscribe((val) => {
@@ -23,7 +24,6 @@ export class AppComponent implements OnInit {
           });
     }
 
-    public readonly title: string = "INF3710 TP5";
     public ngOnInit(): void {
         this.getAnimals();
         this.communicationService.listen().subscribe((m:any) => {
