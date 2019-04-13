@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
-import {Animal} from "../../../common/tables/Animal";
-import {Room} from '../../../common/tables/Room';
+import { Animal } from "../../../common/tables/Animal";
 import { Treatment } from "../../../common/tables/Treatment";
 
 import { DatabaseService } from "../services/database.service";
@@ -83,6 +82,54 @@ export class DatabaseController {
                 });
             });
 
+        router.post("/insertAnimal",
+                    (req: Request, res: Response, next: NextFunction) => {
+                    const num: string = req.body.num;
+                    const name: string = req.body.name;
+                    const type: string = req.body.type;
+                    const desc: string = req.body.desc;
+                    const dob: string = req.body.dob;
+                    const doi: string = req.body.doi;
+                    const state: string = req.body.state;
+                    const ownerNum: string = req.body.ownerNum;
+                    this.databaseService.insertAnimal(num, name, type, desc, dob, doi, state, ownerNum).then((result: pg.QueryResult) => {
+                    res.json(result.rowCount);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                    res.json(-1);
+                });
+            });
+
+        router.post("/modifyAnimal",
+                    (req: Request, res: Response, next: NextFunction) => {
+                    const num: string = req.body.num;
+                    const name: string = req.body.name;
+                    const type: string = req.body.type;
+                    const desc: string = req.body.desc;
+                    const dob: string = req.body.dob;
+                    const doi: string = req.body.doi;
+                    const state: string = req.body.state;
+                    const ownerNum: string = req.body.ownerNum;
+                    this.databaseService.modifyAnimal(num, name, type, desc, dob, doi, state, ownerNum).then((result: pg.QueryResult) => {
+                    res.json(result.rowCount);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                    res.json(-1);
+                });
+            });
+
+        router.post("/deleteAnimal",
+                    (req: Request, res: Response, next: NextFunction) => {
+                    const num: string = req.body.num;
+                    console.log(num);
+                    this.databaseService.deleteAnimal(num).then((result: pg.QueryResult) => {
+                    res.json(result.rowCount);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                    res.json(-1);
+                });
+            });
+
         router.get("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
@@ -114,77 +161,6 @@ export class DatabaseController {
                 }).catch((e: Error) => {
                     console.error(e.stack);
                 });
-            });
-
-        router.get("/hotel/hotelNo",
-                   (req: Request, res: Response, next: NextFunction) => {
-                      this.databaseService.getHotelNo().then((result: pg.QueryResult) => {
-                        const hotelPKs: string[] = result.rows.map((row: any) => row.hotelno);
-                        res.json(hotelPKs);
-                      }).catch((e: Error) => {
-                        console.error(e.stack);
-                    });
-                  });
-
-        router.post("/hotel/insert",
-                    (req: Request, res: Response, next: NextFunction) => {
-                        const hotelNo: string = req.body.hotelNo;
-                        const hotelName: string = req.body.hotelName;
-                        const city: string = req.body.city;
-                        this.databaseService.createHotel(hotelNo, hotelName, city).then((result: pg.QueryResult) => {
-                        res.json(result.rowCount);
-                    }).catch((e: Error) => {
-                        console.error(e.stack);
-                        res.json(-1);
-                    });
-        });
-
-        router.get("/rooms",
-                   (req: Request, res: Response, next: NextFunction) => {
-
-                    // this.databaseService.getRoomFromHotel(req.query.hotelNo, req.query.roomType, req.query.price)
-                    this.databaseService.getRoomFromHotelParams(req.query)
-                    .then((result: pg.QueryResult) => {
-                        const rooms: Room[] = result.rows.map((room: Room) => (
-                            {
-                            hotelno: room.hotelno,
-                            roomno: room.roomno,
-                            typeroom: room.typeroom,
-                            price: parseFloat(room.price.toString())
-                        }));
-                        res.json(rooms);
-                    }).catch((e: Error) => {
-                        console.error(e.stack);
-                    });
-            });
-
-        router.post("/rooms/insert",
-                    (req: Request, res: Response, next: NextFunction) => {
-                    const room: Room = {
-                        hotelno: req.body.hotelno,
-                        roomno: req.body.roomno,
-                        typeroom: req.body.typeroom,
-                        price: parseFloat(req.body.price)};
-                    console.log(room);
-
-                    this.databaseService.createRoom(room)
-                    .then((result: pg.QueryResult) => {
-                        res.json(result.rowCount);
-                    })
-                    .catch((e: Error) => {
-                        console.error(e.stack);
-                        res.json(-1);
-                    });
-        });
-
-        router.get("/tables/:tableName",
-                   (req: Request, res: Response, next: NextFunction) => {
-                    this.databaseService.getAllFromTable(req.params.tableName)
-                    .then((result: pg.QueryResult) => {
-                        res.json(result.rows);
-                    }).catch((e: Error) => {
-                        console.error(e.stack);
-                    });
             });
 
         return router;

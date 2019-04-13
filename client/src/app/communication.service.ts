@@ -55,6 +55,21 @@ export class CommunicationService {
         );
     }
 
+    public insertAnimal(animal: Animal): Observable<any> {
+
+        return this.http.post<any>(this.BASE_URL + "/insertAnimal", animal);
+    }
+
+    public modifyAnimal(animal: Animal): Observable<any> {
+
+        return this.http.post<any>(this.BASE_URL + "/modifyAnimal", animal);
+    }
+
+    public deleteAnimal(num: string): Observable<any> {
+
+        return this.http.post<any>(this.BASE_URL + "/deleteAnimal", {num});
+    }
+
     public getBill(numAni: string): Observable<number[]> {
 
         return this.http.get<number[]>(this.BASE_URL + "/bill/" + numAni).pipe(

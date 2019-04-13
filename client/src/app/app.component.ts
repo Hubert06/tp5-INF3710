@@ -1,8 +1,8 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { CommunicationService } from "./communication.service";
 import { Animal } from "../../../common/tables/Animal";
+import { CommunicationService } from "./communication.service";
 
 @Component({
   selector: "app-root",

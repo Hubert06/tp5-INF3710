@@ -1,10 +1,8 @@
 import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
-import { Room } from "../../../common/tables/Room";
 import { schema } from "../createSchema";
 import { data } from "../populateDB";
-// import { treatmentsHistory } from "../treatmentsHistory";
 
 @injectable()
 export class DatabaseService {
@@ -76,10 +74,77 @@ export class DatabaseService {
         return this.pool.query(bill);
     }
 
-    public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
+    public insertAnimal(num: string, name: string, type: string, desc: string, dob: string, doi: string,
+                        state: string, ownerNum: string): Promise<pg.QueryResult> {
+        this.pool.connect();
+        let insertion: string = ``;
+        if (ownerNum !== undefined && name !== `` && type !== `` && desc !== `` && dob !== `` && doi !== `` && state !== ``) {
+            insertion = `
+            INSERT INTO bdschema.Animal VALUES ('` + num + `', '` + ownerNum + `', '` + name + `', '
+            ` + type + `', '` + desc + `', '` + dob + `', '` + doi + `', '` + state + `');
+            `;
+        }
+
+        return this.pool.query(insertion);
+    }
+
+    public modifyAnimal(num: string, name: string, type: string, desc: string, dob: string, doi: string,
+                        state: string, ownerNum: string): Promise<pg.QueryResult> {
         this.pool.connect();
 
-        return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
+        let queryIsFine: boolean = false;
+        let modification: string = `
+        UPDATE bdschema.Animal
+        SET
+        `;
+
+        if (ownerNum !== undefined) {
+            queryIsFine = true;
+            modification += (`numProp = '` + ownerNum + `',`);
+        }
+        if (name !== ``) {
+            queryIsFine = true;
+            modification += (`nom = '` + name + `',`);
+        }
+        if (type !== ``) {
+            queryIsFine = true;
+            modification += (`type = '` + type + `',`);
+        }
+        if (desc !== ``) {
+            queryIsFine = true;
+            modification += (`description = '` + desc + `',`);
+        }
+        if (dob !== ``) {
+            queryIsFine = true;
+            modification += (`dob = '` + dob + `',`);
+        }
+        if (doi !== ``) {
+            queryIsFine = true;
+            modification += (`dateInsc = '` + doi + `',`);
+        }
+        if (state !== ``) {
+            queryIsFine = true;
+            modification += (`etat = '` + state + `',`);
+        }
+        modification = modification.substring(0, modification.length - 1);
+        modification += (`WHERE numAni = '` + num + `';`);
+
+        if(!queryIsFine) {
+            throw new Error("Invalid input");
+        }
+        return this.pool.query(modification);
+    }
+
+    public deleteAnimal(num: string): Promise<pg.QueryResult> {
+        this.pool.connect();
+
+        const deletion: string = `
+        DELETE FROM bdschema.Animal WHERE Animal.numAni = '` + num + `';
+        `;
+
+        console.log(deletion);
+
+        return this.pool.query(deletion);
     }
 
     public getOwnerNumbers(): Promise<pg.QueryResult> {
@@ -94,120 +159,4 @@ export class DatabaseService {
 
         return this.pool.query('SELECT * FROM bdschema.animal;');
     }
-
-    public getHotelNo(): Promise<pg.QueryResult> {
-        this.pool.connect();
-
-        return this.pool.query('SELECT hotelNo FROM HOTELDB.Hotel;');
-    }
-
-    public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
-        this.pool.connect();
-        const values: string[] = [
-            hotelNo,
-            hotelName,
-            city
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.Hotel VALUES($1, $2, $3);`;
-
-        return this.pool.query(queryText, values);
-    }
-
-    // ROOM
-    public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
-        this.pool.connect();
-
-        let query: string =
-        `SELECT * FROM HOTELDB.room
-        WHERE hotelno=\'${hotelNo}\'`;
-        if (roomType !== undefined) {
-            query = query.concat('AND ');
-            query = query.concat(`typeroom=\'${roomType}\'`);
-        }
-        if (price !== undefined) {
-            query = query.concat('AND ');
-            query = query.concat(`price =\'${price}\'`);
-        }
-        console.log(query);
-
-        return this.pool.query(query);
-    }
-
-    public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
-        this.pool.connect();
-
-        let query: string = 'SELECT * FROM HOTELDB.room \n';
-        const keys: string[] = Object.keys(params);
-        if (keys.length > 0) {
-            query = query.concat(`WHERE ${keys[0]} =\'${params[keys[0]]}\'`);
-        }
-
-        // On enleve le premier element
-        keys.shift();
-
-        // tslint:disable-next-line:forin
-        for (const param in keys) {
-            const value: string = keys[param];
-            query = query.concat(`AND ${value} = \'${params[value]}\'`);
-            if (param === 'price') {
-                query = query.replace('\'', '');
-            }
-        }
-
-        console.log(query);
-
-        return this.pool.query(query);
-
-    }
-
-    public createRoom(room: Room): Promise<pg.QueryResult> {
-        this.pool.connect();
-        const values: string[] = [
-            room.roomno,
-            room.hotelno,
-            room.typeroom,
-            room.price.toString()
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
-
-        return this.pool.query(queryText, values);
-    }
-
-    // GUEST
-    public createGuest(guestNo: string,
-                       nas: string,
-                       guestName: string,
-                       gender: string,
-                       guestCity: string): Promise<pg.QueryResult> {
-        this.pool.connect();
-        const values: string[] = [
-            guestNo,
-            nas,
-            guestName,
-            gender,
-            guestCity
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
-
-        return this.pool.query(queryText, values);
-    }
-
-    // BOOKING
-    public createBooking(hotelNo: string,
-                         guestNo: string,
-                         dateFrom: Date,
-                         dateTo: Date,
-                         roomNo: string): Promise<pg.QueryResult> {
-        this.pool.connect();
-        const values: string[] = [
-            hotelNo,
-            guestNo,
-            dateFrom.toString(),
-            dateTo.toString(),
-            roomNo
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
-
-        return this.pool.query(queryText, values);
-        }
 }
