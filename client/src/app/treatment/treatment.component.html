@@ -1,3 +1,25 @@
-<p>
-  treatment works!
-</p>
+<div id="treatment">
+  <div style="text-align: left">
+    <h2> Find an animal treatments history :</h2>
+    numAnimal : <input class="form-control col-md-4" #numAnimalTreatment>
+    <button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find </button>
+  </div>
+  <div>
+    <h2>Treatments of {{currentAnimal}}</h2>
+    <table id ="ht" align="center" border="1" width="500">
+      <thead>
+        <th> Number </th>
+        <th> Description </th>
+        <th> Cost </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let treatment of treatments">
+          <td> {{treatment.numtrait}}</td>
+          <td> {{treatment.description}}</td>
+          <td> {{treatment.cout}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -22,43 +22,10 @@
   </div> 
   <div>
       <div>
-        <h2> Find an animal treatments history :</h2>
-        numAnimal : <input class="form-control col-md-4" #numAnimalTreatment>
-        <button type="button" class="btn btn-primary" (click)="findAnimalTreatments(numAnimalTreatment.value)"> Find </button>
-      </div>
-      <div>
         <h2> Find information on an animal :</h2>
         Name of the animal : <input class="form-control col-md-4" #animalNameInfos>
         <button type="button" class="btn btn-primary" (click)="findAnimalInformation(animalNameInfos.value)"> Find </button>
       </div>
   </div>
-</div>
-
-<div id="ht" *ngIf="route != '/room'">
-  <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
-  <table id ="ht" align="center" border="1" width="350">
-    <thead>
-      <th> Numéro </th>
-      <th> Name </th>
-      <th> Type </th>
-      <th> Description </th>
-      <th> Date of birth </th>
-      <th> Date of inscription </th>
-      <th> State </th>
-      <th> Owner number </th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let animal of animals">
-        <td> {{animal.num}}</td>
-        <td> {{animal.name}}</td>
-        <td> {{animal.type}}</td>
-        <td> {{animal.desc}}</td>
-        <td> {{animal.dob}}</td>
-        <td> {{animal.doi}}</td>
-        <td> {{animal.state}}</td>
-        <td> {{animal.ownerNum}}</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
   
