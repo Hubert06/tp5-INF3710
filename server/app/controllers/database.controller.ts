@@ -51,6 +51,7 @@ export class DatabaseController {
 
         router.get("/animalInformation/:nomAni",
                    (req: Request, res: Response, next: NextFunction) => {
+                    console.log("got here!");
                     const nomAni: string = req.params.nomAni;
                     this.databaseService.getAnimalInformation(nomAni).then((result: pg.QueryResult) => {
                     const animal: Animal[] =
@@ -100,8 +101,8 @@ export class DatabaseController {
                 });
             });
 
-        router.post("/modifyAnimal",
-                    (req: Request, res: Response, next: NextFunction) => {
+        router.put("/modifyAnimal",
+                   (req: Request, res: Response, next: NextFunction) => {
                     const num: string = req.body.num;
                     const name: string = req.body.name;
                     const type: string = req.body.type;
@@ -118,9 +119,9 @@ export class DatabaseController {
                 });
             });
 
-        router.post("/deleteAnimal",
-                    (req: Request, res: Response, next: NextFunction) => {
-                    const num: string = req.body.num;
+        router.delete("/deleteAnimal/:num",
+                      (req: Request, res: Response, next: NextFunction) => {
+                    const num: string = req.params.num;
                     console.log(num);
                     this.databaseService.deleteAnimal(num).then((result: pg.QueryResult) => {
                     res.json(result.rowCount);

@@ -62,12 +62,12 @@ export class CommunicationService {
 
     public modifyAnimal(animal: Animal): Observable<any> {
 
-        return this.http.post<any>(this.BASE_URL + "/modifyAnimal", animal);
+        return this.http.put<any>(this.BASE_URL + "/modifyAnimal", animal);
     }
 
     public deleteAnimal(num: string): Observable<any> {
 
-        return this.http.post<any>(this.BASE_URL + "/deleteAnimal", {num});
+        return this.http.delete<any>(this.BASE_URL + "/deleteAnimal/" + num);
     }
 
     public getBill(numAni: string): Observable<number[]> {
