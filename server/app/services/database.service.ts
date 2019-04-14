@@ -105,46 +105,37 @@ export class DatabaseService {
         if (ownerNum === undefined) {
             ownerNum = ``;
         }
-        let values: string[] = [num];
         let modification: string = `
         UPDATE bdschema.Animal
         SET
         `;
 
         if (ownerNum !== ``) {
-            values.push(ownerNum);
-            modification += (`numProp = $2,`);
+            modification += (`numProp = '` + ownerNum + `',`);
         }
         if (name !== ``) {
-            values.push(name);
-            modification += (`nom = $3,`);
+            modification += (`nom = '` + name + `',`);
         }
         if (type !== ``) {
-            values.push(type);
-            modification += (`type = $4,`);
+            modification += (`type = '` + type + `',`);
         }
         if (desc !== ``) {
-            values.push(desc);
-            modification += (`description = $5,`);
+            modification += (`description = '` + desc + `',`);
         }
         if (dob !== ``) {
-            values.push(dob);
-            modification += (`dob = $6,`);
+            modification += (`dob = '` + dob + `',`);
         }
         if (doi !== ``) {
-            values.push(doi);
-            modification += (`dateInsc = $7,`);
+            modification += (`dateInsc = '` + doi + `',`);
         }
         if (state !== ``) {
-            values.push(state);
-            modification += (`etat = $8,`);
+            modification += (`etat = '` + state + `',`);
         }
         modification = modification.substring(0, modification.length - 1);
-        modification += (` WHERE numAni = $1;`);
-        console.log(values);
+        modification += (` WHERE numAni = '` + num + `';`);
         console.log(modification);
 
-        return this.pool.query(modification, values);
+        return this.pool.query(modification);
     }
 
     public async deleteAnimal(num: string): Promise<pg.QueryResult> {
