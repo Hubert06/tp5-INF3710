@@ -25,20 +25,6 @@ export class AnimalComponent {
     this.getOwnerNumbers();
   }
 
-  // public insertAnimal(animalNo: string, animalName: string, animalCity: string): void {
-  //   const animal: any = {
-  //       "animalNo" : animalNo,
-  //       "animalName" : animalName,
-  //       "city" : animalCity
-  //   };
-  //   this.communicationService.insertHotel(animal).subscribe((res: number) => {
-  //       if (res > 0) {
-  //           this.communicationService.filter("update");
-  //       }
-  //       this.duplicateError = (res === -1);
-  //   });
-  // }
-
   public findAnimalInformation(nomAni: string): void {
     this.communicationService.getAnimalInformation(nomAni).subscribe((animals: Animal[]) => {
       this.cutDatesAnimals(animals);

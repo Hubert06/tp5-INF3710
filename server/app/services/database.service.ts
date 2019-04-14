@@ -51,6 +51,7 @@ export class DatabaseService {
 
     public async getAnimalInformation(nomAni: string): Promise<pg.QueryResult> {
         this.pool.connect();
+
         const values: string[] = [`%` + nomAni + `%`];
         const animalInformation: string = `
         SELECT * FROM bdschema.Animal WHERE LOWER(bdschema.Animal.nom) LIKE $1;
