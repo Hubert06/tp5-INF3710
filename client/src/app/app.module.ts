@@ -7,13 +7,11 @@ import { AnimalComponent } from "./animal/animal.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CommunicationService } from "./communication.service";
-import { RoomComponent } from "./room/room.component";
-import { TreatmentComponent } from './treatment/treatment.component';
+import { TreatmentComponent } from "./treatment/treatment.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoomComponent,
     AnimalComponent,
     TreatmentComponent,
   ],

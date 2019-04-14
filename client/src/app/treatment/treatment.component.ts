@@ -30,7 +30,6 @@ export class TreatmentComponent implements OnInit {
     this.currentAnimalTreatments = numAni;
     this.communicationService.getTreatmentsHistory(numAni).subscribe((treatments: Treatment[]) => {
       this.treatments = treatments;
-      console.log(this.treatments);
     });
   }
 
