@@ -32,7 +32,7 @@ export class DatabaseController {
                     });
         });
 
-        router.get("/treatmentsHistory/:numAni",
+        router.get("/treatment/:numAni",
                    (req: Request, res: Response, next: NextFunction) => {
                     const numAni: string = req.params.numAni;
                     this.databaseService.getTreatmentsHistory(numAni).then((result: pg.QueryResult) => {
@@ -49,29 +49,6 @@ export class DatabaseController {
                 });
             });
 
-        router.get("/animalInformation/:nomAni",
-                   (req: Request, res: Response, next: NextFunction) => {
-                    console.log("got here!");
-                    const nomAni: string = req.params.nomAni;
-                    this.databaseService.getAnimalInformation(nomAni).then((result: pg.QueryResult) => {
-                    const animal: Animal[] =
-                    result.rows.map((ani: any) => (
-                        {
-                        num : ani.numani,
-                        name : ani.nom,
-                        type : ani.type,
-                        desc : ani.description,
-                        dob : ani.dob,
-                        doi : ani.dateinsc,
-                        state : ani.etat,
-                        ownerNum : ani.numprop,
-                    }));
-                    res.json(animal);
-                }).catch((e: Error) => {
-                    console.error(e.stack);
-                });
-            });
-
         router.get("/bill/:numAni",
                    (req: Request, res: Response, next: NextFunction) => {
                     const numAni: string = req.params.numAni;
@@ -83,7 +60,7 @@ export class DatabaseController {
                 });
             });
 
-        router.post("/insertAnimal",
+        router.post("/animal",
                     (req: Request, res: Response, next: NextFunction) => {
                     const num: string = req.body.num;
                     const name: string = req.body.name;
@@ -101,7 +78,7 @@ export class DatabaseController {
                 });
             });
 
-        router.put("/modifyAnimal",
+        router.put("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
                     const num: string = req.body.num;
                     const name: string = req.body.name;
@@ -112,18 +89,6 @@ export class DatabaseController {
                     const state: string = req.body.state;
                     const ownerNum: string = req.body.ownerNum;
                     this.databaseService.modifyAnimal(num, name, type, desc, dob, doi, state, ownerNum).then((result: pg.QueryResult) => {
-                    res.json(result.rowCount);
-                }).catch((e: Error) => {
-                    console.error(e.stack);
-                    res.json(-1);
-                });
-            });
-
-        router.delete("/deleteAnimal/:num",
-                      (req: Request, res: Response, next: NextFunction) => {
-                    const num: string = req.params.num;
-                    console.log(num);
-                    this.databaseService.deleteAnimal(num).then((result: pg.QueryResult) => {
                     res.json(result.rowCount);
                 }).catch((e: Error) => {
                     console.error(e.stack);
@@ -152,6 +117,41 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
             });
+
+        router.get("/animal/:nomAni",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    console.log("got here!");
+                    const nomAni: string = req.params.nomAni;
+                    this.databaseService.getAnimalInformation(nomAni).then((result: pg.QueryResult) => {
+                    const animal: Animal[] =
+                    result.rows.map((ani: any) => (
+                        {
+                        num : ani.numani,
+                        name : ani.nom,
+                        type : ani.type,
+                        desc : ani.description,
+                        dob : ani.dob,
+                        doi : ani.dateinsc,
+                        state : ani.etat,
+                        ownerNum : ani.numprop,
+                    }));
+                    res.json(animal);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
+        router.delete("/animal/:num",
+                      (req: Request, res: Response, next: NextFunction) => {
+                        const num: string = req.params.num;
+                        console.log(num);
+                        this.databaseService.deleteAnimal(num).then((result: pg.QueryResult) => {
+                        res.json(result.rowCount);
+                    }).catch((e: Error) => {
+                        console.error(e.stack);
+                        res.json(-1);
+                    });
+                });
 
         router.get("/ownerNumbers",
                    (req: Request, res: Response, next: NextFunction) => {

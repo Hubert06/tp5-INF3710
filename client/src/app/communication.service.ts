@@ -43,31 +43,31 @@ export class CommunicationService {
 
     public getTreatmentsHistory(numAni: string): Observable<Treatment[]> {
 
-        return this.http.get<Treatment[]>(this.BASE_URL + "/treatmentsHistory/" + numAni).pipe(
+        return this.http.get<Treatment[]>(this.BASE_URL + "/treatment/" + numAni).pipe(
             catchError(this.handleError<Treatment[]>("findAnimalTreatments")),
         );
     }
 
     public getAnimalInformation(nomAni: string): Observable<Animal[]> {
 
-        return this.http.get<Animal[]>(this.BASE_URL + "/animalInformation/" + nomAni).pipe(
+        return this.http.get<Animal[]>(this.BASE_URL + "/animal/" + nomAni).pipe(
             catchError(this.handleError<Animal[]>("findAnimalInformation")),
         );
     }
 
     public insertAnimal(animal: Animal): Observable<any> {
 
-        return this.http.post<any>(this.BASE_URL + "/insertAnimal", animal);
+        return this.http.post<any>(this.BASE_URL + "/animal", animal);
     }
 
     public modifyAnimal(animal: Animal): Observable<any> {
 
-        return this.http.put<any>(this.BASE_URL + "/modifyAnimal", animal);
+        return this.http.put<any>(this.BASE_URL + "/animal", animal);
     }
 
     public deleteAnimal(num: string): Observable<any> {
 
-        return this.http.delete<any>(this.BASE_URL + "/deleteAnimal/" + num);
+        return this.http.delete<any>(this.BASE_URL + "/animal/" + num);
     }
 
     public getBill(numAni: string): Observable<number[]> {
