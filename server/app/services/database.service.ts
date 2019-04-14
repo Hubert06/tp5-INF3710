@@ -9,7 +9,7 @@ export class DatabaseService {
 
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
-        user: "tp5User",
+        user: "tp5_user",
         database: "TP5",
         password: "banane123",
         port: 5432,
@@ -52,11 +52,12 @@ export class DatabaseService {
     public async getAnimalInformation(nomAni: string): Promise<pg.QueryResult> {
         this.pool.connect();
 
+        const values: string[] = [`%` + nomAni + `%`];
         const animalInformation: string = `
-        SELECT * FROM bdschema.Animal WHERE LOWER(bdschema.Animal.nom) LIKE %${nomAni}%;
+        SELECT * FROM bdschema.Animal WHERE LOWER(bdschema.Animal.nom) LIKE $1;
         `;
 
-        return this.pool.query(animalInformation);
+        return this.pool.query(animalInformation, values);
     }
 
     public async getBill(numAni: string): Promise<pg.QueryResult> {
@@ -68,7 +69,7 @@ export class DatabaseService {
         LEFT JOIN bdschema.Examen ON Prescription.numExam = bdschema.Examen.numExam
         LEFT JOIN bdschema.Animal ON Examen.numAni = bdschema.Animal.numAni
         LEFT JOIN bdschema.Proprietaire ON Animal.numProp = bdschema.Proprietaire.numProp
-        WHERE LOWER(bdschema.Animal.numAni) = LOWER('${numAni});
+        WHERE LOWER(bdschema.Animal.numAni) = LOWER('` + numAni + `');
         `;
 
         return this.pool.query(bill);
@@ -111,28 +112,28 @@ export class DatabaseService {
         `;
 
         if (ownerNum !== ``) {
-            modification.concat(`numProp = '${ownerNum}',`);
+            modification += (`numProp = '` + ownerNum + `',`);
         }
         if (name !== ``) {
-            modification.concat(`nom = '${name}',`);
+            modification += (`nom = '` + name + `',`);
         }
         if (type !== ``) {
-            modification.concat(`type = '${type}',`);
+            modification += (`type = '` + type + `',`);
         }
         if (desc !== ``) {
-            modification.concat(`description = '${desc}',`);
+            modification += (`description = '` + desc + `',`);
         }
         if (dob !== ``) {
-            modification.concat(`dob = '${dob}',`);
+            modification += (`dob = '` + dob + `',`);
         }
         if (doi !== ``) {
-            modification.concat(`dateInsc = '${doi}',`);
+            modification += (`dateInsc = '` + doi + `',`);
         }
         if (state !== ``) {
-            modification.concat(`etat = '${state}',`);
+            modification += (`etat = '` + state + `',`);
         }
         modification = modification.substring(0, modification.length - 1);
-        modification.concat(` WHERE numAni = '${num}';`);
+        modification += (` WHERE numAni = '` + num + `';`);
         console.log(modification);
 
         return this.pool.query(modification);
