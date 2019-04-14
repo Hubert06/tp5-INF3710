@@ -21,6 +21,7 @@ INSERT INTO bdschema.Veterinaire VALUES ('E203');
 INSERT INTO bdschema.Proprietaire VALUES ('P101', 'C001', 'Gino Tremblay', '123 rue des Tremblay', '450-123-4567');
 INSERT INTO bdschema.Proprietaire VALUES ('P201', 'C002', 'Camille Tremblay', '234 rue des Tremblay', '450-234-5678');
 INSERT INTO bdschema.Proprietaire VALUES ('P301', 'C002', 'Bob Tremb', '234 rue des Tremblay', '450-234-5678');
+INSERT INTO bdschema.Proprietaire VALUES ('P302', 'C002', 'Bill Tremb', '234 rue des Tremblay', '450-234-5678');
 
 INSERT INTO bdschema.Animal VALUES ('A101', 'P101', 'Pedro', 'chat', 'Gros et feroce', '2001-01-01', '2019-01-01', 'vivant');
 INSERT INTO bdschema.Animal VALUES ('A102', 'P101', 'Juan', 'tortue', 'Petit et vulnerable', '2001-02-02', '2019-02-02', 'decede');
@@ -31,25 +32,33 @@ INSERT INTO bdschema.Animal VALUES ('A106', 'P101', 'Bella', 'lezard', 'Petit et
 INSERT INTO bdschema.Animal VALUES ('A201', 'P201', 'Carlos', 'chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
 INSERT INTO bdschema.Animal VALUES ('A202', 'P201', 'Emilio', 'chien', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 INSERT INTO bdschema.Animal VALUES ('A203', 'P201', 'bob', 'oiseau', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
-INSERT INTO bdschema.Animal VALUES ('A204', 'P201', 'gino', 'chienchilla', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A204', 'P201', 'gino', 'chinchilla', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 INSERT INTO bdschema.Animal VALUES ('A205', 'P201', 'ginette', 'hamster', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
 INSERT INTO bdschema.Animal VALUES ('A206', 'P201', 'bernard', 'serpent', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 INSERT INTO bdschema.Animal VALUES ('A301', 'P301', 'julie', 'serpent', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 INSERT INTO bdschema.Animal VALUES ('A302', 'P301', 'Mike', 'singe', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 INSERT INTO bdschema.Animal VALUES ('A303', 'P301', 'Marie', 'lion', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
+INSERT INTO bdschema.Animal VALUES ('A304', 'P302', 'Carl', 'chat', 'Gros et vulnerable', '2002-01-01', '2019-03-03', 'vivant');
+INSERT INTO bdschema.Animal VALUES ('A305', 'P302', 'Emile', 'chien', 'Petit et feroce', '2002-02-02', '2019-04-04', 'decede');
 
 INSERT INTO bdschema.Examen VALUES ('EX101', 'E103', 'A101', '2019-03-03', '12:00', 'Examen general');
 INSERT INTO bdschema.Examen VALUES ('EX102', 'E103', 'A102', '2019-04-04', '18:00', 'Examen general');
+INSERT INTO bdschema.Examen VALUES ('EX103', 'E103', 'A101', '2019-03-05', '15:00', 'Examen general');
+INSERT INTO bdschema.Examen VALUES ('EX104', 'E103', 'A101', '2019-03-06', '17:00', 'Examen general');
 INSERT INTO bdschema.Examen VALUES ('EX201', 'E203', 'A201', '2019-05-05', '14:00', 'Examen general');
 INSERT INTO bdschema.Examen VALUES ('EX202', 'E203', 'A202', '2019-06-06', '20:00', 'Examen general');
 
 INSERT INTO bdschema.Traitement VALUES ('T101', 'Application du platre', 500);
 INSERT INTO bdschema.Traitement VALUES ('T102', 'Don du medicament', 300);
+INSERT INTO bdschema.Traitement VALUES ('T103', 'Vaccin', 450);
+INSERT INTO bdschema.Traitement VALUES ('T104', 'medicament', 250);
 INSERT INTO bdschema.Traitement VALUES ('T201', 'App des points de suture', 400);
 INSERT INTO bdschema.Traitement VALUES ('T202', 'Vaccination contre la grippe', 200);
 
 INSERT INTO bdschema.Prescription VALUES ('T101', 'EX101', 1, '2019-03-03', '2019-03-04');
 INSERT INTO bdschema.Prescription VALUES ('T102', 'EX102', 3, '2019-04-04', '2019-04-08');
+INSERT INTO bdschema.Prescription VALUES ('T103', 'EX101', 1, '2019-03-03', '2019-03-04');
+INSERT INTO bdschema.Prescription VALUES ('T104', 'EX102', 3, '2019-04-04', '2019-04-08');
 INSERT INTO bdschema.Prescription VALUES ('T201', 'EX201', 1, '2019-05-05', '2019-05-06');
 INSERT INTO bdschema.Prescription VALUES ('T202', 'EX202', 1, '2019-06-06', '2019-06-07');
 `;
