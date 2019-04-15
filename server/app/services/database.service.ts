@@ -7,6 +7,8 @@ import { data } from "../populateDB";
 @injectable()
 export class DatabaseService {
 
+   
+
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
         user: "tp5_user",
@@ -19,23 +21,23 @@ export class DatabaseService {
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
+    public constructor() {
+        this.pool.connect();
+    }
     /*
         METHODES DE DEBUG
     */
     public createSchema(): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         return this.pool.query(schema);
     }
 
     public populateDb(): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         return this.pool.query(data);
     }
 
     public getTreatmentsHistory(numAni: string): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         const treatmentsHistory: string = `
         SELECT Traitement.numTrait, Traitement.description, Traitement.cout FROM bdschema.Traitement
@@ -50,7 +52,6 @@ export class DatabaseService {
     }
 
     public getAnimalInformation(nomAni: string): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         const values: string[] = [`%` + nomAni + `%`];
         const animalInformation: string = `
@@ -61,7 +62,6 @@ export class DatabaseService {
     }
 
     public getBill(numAni: string): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         const bill: string = `
         SELECT SUM(bdschema.Traitement.cout) AS totalbill FROM bdschema.Traitement
@@ -77,7 +77,6 @@ export class DatabaseService {
 
     public insertAnimal(num: string, name: string, type: string, desc: string, dob: string, doi: string,
                         state: string, ownerNum: string): Promise<pg.QueryResult> {
-        this.pool.connect();
         const values: string[] = [
             num,
             ownerNum,
@@ -101,7 +100,6 @@ export class DatabaseService {
     // tslint:disable-next-line: max-func-body-length
     public modifyAnimal(num: string, name: string, type: string, desc: string, dob: string, doi: string,
                         state: string, ownerNum: string): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         if (ownerNum === undefined) {
             ownerNum = ``;
@@ -139,7 +137,6 @@ export class DatabaseService {
     }
 
     public deleteAnimal(num: string): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         const values: string[] = [num];
 
@@ -151,13 +148,11 @@ export class DatabaseService {
     }
 
     public getOwnerNumbers(): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         return this.pool.query(`SELECT bdschema.proprietaire.numprop FROM bdschema.proprietaire`);
     }
 
     public getAnimals(): Promise<pg.QueryResult> {
-        this.pool.connect();
 
         return this.pool.query('SELECT * FROM bdschema.animal;');
     }
